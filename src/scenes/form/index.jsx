@@ -28,7 +28,7 @@ const userSchema = yup.object().shape({
         .required("required"),
 });
 
-const Form = () => {
+const Register = () => {
     const isNonMobile = useMediaQuery("(min-width: 600px)");
 
     function handleFormSubmit(values) {
@@ -37,7 +37,7 @@ const Form = () => {
     
     return (
         <Box m="20px">
-            <Header title="CREATE USER" subtitle="Create a New User Profile" />
+            <Header title="REGISTER" subtitle="Create a New User Profile" />
 
             <Formik
                 onSubmit={handleFormSubmit}
@@ -145,4 +145,4 @@ const Form = () => {
     )
 };
 
-export default Form;
+export default Register;
