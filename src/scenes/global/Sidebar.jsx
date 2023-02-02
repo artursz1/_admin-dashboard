@@ -11,6 +11,7 @@ import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFi
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -168,6 +169,13 @@ const Sidebar = () => {
               title="Vehicles"
               to="/vehicles"
               icon={<DirectionsCarFilledOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="CHQ"
+              to="/chq"
+              icon={<ApartmentIcon />}
               selected={selected}
               setSelected={setSelected}
             />

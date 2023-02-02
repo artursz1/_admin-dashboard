@@ -58,7 +58,8 @@ const Vehicles = () => {
             <Header title="Vehicles" subtitle="Cars | Motorcycles | Planes"></Header>
             <Box
                 m="40px 0 0 0"
-                height="75vh"
+                height="50vh"
+                width="100vh"
                 sx={{
                     "& .MuiDataGrid-root": {
                         border: "none",

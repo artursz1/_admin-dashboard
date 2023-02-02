@@ -6,7 +6,7 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/informations";
 import Members from "./scenes/members";
 import Vehicles from "./scenes/vehicles";
-// import Chq from "./scenes/chq";
+import Chq from "./scenes/chq";
 import Calendar from "./scenes/calendar";
 import Register from "./scenes/form";
 
@@ -25,7 +25,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/members" element={<Members />} />
               <Route path="/vehicles" element={<Vehicles />} />
-              {/* <Route path="/chq" element={<Chq />} /> */}
+              <Route path="/chq" element={<Chq />} />
               <Route path="/register" element={<Register />} />
               <Route path="/calendar" element={<Calendar />} />
             </Routes>
