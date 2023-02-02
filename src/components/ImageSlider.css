@@ -1,6 +1,6 @@
 .slider {
     position: relative;
-    height: 60vh;
+    height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,6 +53,6 @@
   
   .slide.active {
     opacity: 1;
-    transition-duration: 2s;
+    transition-duration: 1.5s;
     transform: scale(1.2);
   }

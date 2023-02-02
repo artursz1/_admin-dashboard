@@ -11,44 +11,27 @@ const Vehicles = () => {
     const colors = tokens(theme.palette.mode);
 
     const columns = [
-        { field: "id", headerName: "ID", flex: 0.5 },
-        { field: "registrarId", headeRName: "Registrar ID"},
-        { // headerName: "ID" -> represents the column name || field: "id" -> represents member id  
+        {
             field: "name",
             headerName: "Name",
             flex: 1,
             cellClassName: "name-column--cell",
         },
         {
-            field: "age",
-            headerName: "Age",
+            field: "rank",
+            headerName: "Rank",
             type: "number",
             headerAlign: "left",
             align: "left",
         },
         {
-            field: "phone",
-            headerName: "Phone",
+            field: "count",
+            headerName: "Total",
             flex: 1,
         },
         {
-            field: "email",
-            headerName: "Email",
-            flex: 1,
-        },
-        {
-            field: "address",
-            headerName: "Address",
-            flex: 1,
-        },
-        {
-            field: "city",
-            headerName: "City",
-            flex: 1,
-        },
-        {
-            field: "zipcode",
-            headerName: "Zipcode",
+            field: "location",
+            headerName: "Location",
             flex: 1,
         },
     ];
@@ -59,7 +42,7 @@ const Vehicles = () => {
             <Box
                 m="40px 0 0 0"
                 height="50vh"
-                width="100vh"
+                width="165vh"
                 sx={{
                     "& .MuiDataGrid-root": {
                         border: "none",
