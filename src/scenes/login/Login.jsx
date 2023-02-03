@@ -8,20 +8,42 @@ import supabaseClient from "../../data/supabaseClient";
 const client = supabaseClient;
 
 const handleCreateAccount = async () => {
-    const username = document.querySelector('input[placeholder="username"]').value;
-    const email = document.querySelector('input[placeholder="email"]').value;
-    const password = document.querySelector('input[placeholder="password"]').value;
+    const _username = document.querySelector('input[placeholder="username"]').value;
+    const _email = document.querySelector('input[placeholder="email"]').value;
+    const _password = document.querySelector('input[placeholder="password"]').value;
 
-    if (username === '' || email === '' || !email.includes("@") || password === '') {
+    const existingUsername = await client.from('users')
+        .select('username')
+        .where({username: _username})
+        .first();
+
+    if (existingUsername) {
+        alert("Username already taken");
+        console.log('Existing username: ', existingUsername);
+        return;
+    }
+
+    const existingEmail = await client.from('users')
+        .select('email')
+        .where({email: _email})
+        .first();
+
+    if (existingEmail) {
+        alert("Email already taken");
+        console.log('Existing email address: ', existingEmail);
+        return;
+    }
+
+    if (_username === '' || _email === '' || !_email.includes("@") || _password === '') {
         alert("All fields are required");
         return;
     }
 
     try {
     await client.from('users').insert({
-        username,
-        email,
-        password,
+        _username,
+        _email,
+        _password,
         rank: 1
     });
     } catch (error) {
