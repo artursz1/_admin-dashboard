@@ -12,7 +12,7 @@ const handleCreateAccount = async () => {
     const email = document.querySelector('input[placeholder="email"]').value;
     const password = document.querySelector('input[placeholder="password"]').value;
 
-    if (username === '' || email === '' || password === '') {
+    if (username === '' || email === '' || !email.includes("@") || password === '') {
         alert("All fields are required");
         return;
     }
