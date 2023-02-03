@@ -32,9 +32,11 @@ const Vehicles = () => {
             count: res[i].total,
           });
         }
-        
+
         setMockDataVehicles(mockDataVehicles);
       });
+
+
 
     const columns = [
         {

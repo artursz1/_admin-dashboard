@@ -73,64 +73,6 @@ export const mockDataTeam = [
     },
   ];
 
-  export const mockDataContacts = [
-    {
-      id: 1,
-      name: "Bati",
-      location: "CHQ",
-      rank: "1+",
-      count: "5",
-      address: "0912 Won Street, Alabama, SY 10001",
-      city: "New York",
-      zipCode: "10001",
-      registrarId: 123512,
-    },
-    {
-      id: 2,
-      name: "FCR",
-      location: "CHQ",
-      rank: "1+",
-      count: "3",
-      address: "1234 Main Street, New York, NY 10001",
-      city: "New York",
-      zipCode: "13151",
-      registrarId: 123512,
-    },
-    {
-      id: 3,
-      name: "Dubsta3",
-      location: "CHQ",
-      rank: "2+",
-      count: "1",
-      address: "3333 Want Blvd, Estanza, NAY 42125",
-      city: "New York",
-      zipCode: "87281",
-      registrarId: 4132513,
-    },
-    {
-      id: 4,
-      name: "Tyrant",
-      location: "CHQ",
-      rank: "5+",
-      count: "1",
-      address: "1514 Main Street, New York, NY 22298",
-      city: "New York",
-      zipCode: "15551",
-      registrarId: 123512,
-    },
-    {
-      id: 5,
-      name: "Jester",
-      location: "CHQ",
-      rank: "1+",
-      count: "1",
-      address: "11122 Welping Ave, Tenting, CD 21321",
-      city: "Tenting",
-      zipCode: "14215",
-      registrarId: 123512,
-    },
-  ];
-
   export const mockDataInvoices = [
     {
       id: 1,
