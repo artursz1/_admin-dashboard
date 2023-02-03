@@ -33,7 +33,7 @@ const handleCreateAccount = async () => {
     const [signIn, toggle] = React.useState(true);
     const navigate = useNavigate();
 
-    const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+    const { setIsLoggedIn } = useContext(LoginContext);
 
     function handleSignIn() {
         navigate('/informations');
