@@ -1,14 +1,40 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataContacts } from "../../data/mockData";
 import { useTheme } from "@mui/material";
 
 import Header from "../../components/Header";
 
+import { useState } from "react";
+import supabase from "../../data/supabaseClient";
+
 const Vehicles = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    async function fetchVehicles() {
+        let { data: vehicles } = await supabase.from('vehicles').select('*');
+        
+        return vehicles;
+    }
+    
+    let [ mockDataVehicles, setMockDataVehicles ] = useState([]);
+
+    fetchVehicles().then(res => {
+        const mockDataVehicles = [];
+
+        for (let i = 0; i < res.length; i++) {
+          mockDataVehicles.push({
+            id: i + 1,
+            name: res[i].name,
+            location: res[i].location,
+            rank: res[i].rank,
+            count: res[i].total,
+          });
+        }
+        
+        setMockDataVehicles(mockDataVehicles);
+      });
 
     const columns = [
         {
@@ -41,7 +67,7 @@ const Vehicles = () => {
             <Header title="Vehicles" subtitle="Cars | Motorcycles | Planes"></Header>
             <Box
                 m="40px 0 0 0"
-                height="50vh"
+                height="46vh"
                 width="165vh"
                 sx={{
                     "& .MuiDataGrid-root": {
@@ -70,7 +96,7 @@ const Vehicles = () => {
                 }}
             >
                 <DataGrid
-                    rows={mockDataContacts}
+                    rows={mockDataVehicles}
                     columns={columns}
                     components={{ Toolbar: GridToolbar }}
                 />
