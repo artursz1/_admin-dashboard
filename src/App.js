@@ -32,7 +32,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {isLoggedIn && <Sidebar />}
+          {isLoggedIn && 
+              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                <Sidebar />
+              </UserContext.Provider>
+              }
           <main className="content">
             {isLoggedIn && <Topbar />}
             {isLoggedIn ? (

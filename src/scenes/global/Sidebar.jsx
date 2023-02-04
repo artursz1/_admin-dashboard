@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -12,6 +12,8 @@ import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ApartmentIcon from '@mui/icons-material/Apartment';
+
+import { UserContext } from "../../App";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,6 +38,7 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Informations");
+  const { loggedInUsername } = useContext(UserContext);
 
   return (
     <Box
@@ -103,7 +106,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  JohnLennon
+                  {loggedInUsername}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Founder
