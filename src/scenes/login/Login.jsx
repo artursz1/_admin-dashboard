@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import * as Components from '../login/LoginComponents';
-import { LoginContext } from '../../App';
+import { LoginContext, UserContext } from '../../App';
 
 import { useNavigate } from 'react-router-dom';
 import supabaseClient from "../../data/supabaseClient";
@@ -8,9 +8,9 @@ import supabaseClient from "../../data/supabaseClient";
 const client = supabaseClient;
 
 const handleCreateAccount = async () => {
-    const username = document.querySelector('input[placeholder="username"]').value;
-    const email = document.querySelector('input[placeholder="email"]').value;
-    const password = document.querySelector('input[placeholder="password"]').value;
+    const username = document.querySelector('input[placeholder="register-username"]').value;
+    const email = document.querySelector('input[placeholder="register-email"]').value;
+    const password = document.querySelector('input[placeholder="register-password"]').value;
 
     if (username === '' || email === '' || !email.includes("@") || password === '') {
         alert("All fields are required");
@@ -31,25 +31,54 @@ const handleCreateAccount = async () => {
 
  function Login() {
     const [signIn, toggle] = React.useState(true);
+
+    const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+    const { loggedInUsername, setLoggedInUsername } = useContext(UserContext);
+
+    console.log(isLoggedIn);
+    console.log(loggedInUsername);
+
     const navigate = useNavigate();
 
-    let { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+    const handleSignIn = async (event) => {
+        event.preventDefault();
+        const _username = document.querySelector('input[placeholder="username"]').value;
+        const _password = document.querySelector('input[placeholder="password"]').value;
+    
+        if (_username === '' || _password === '') {
+          alert("Both username and password are required");
+          return;
+        }
+    
+        async function fetchUsers() {
+            let { data: users } = await client.from('users').select('*');
+            
+            return users;
+        }
 
-    function handleSignIn() {
-        console.log(isLoggedIn);
-
-        navigate('/informations');
-        setIsLoggedIn(true);
-    }
+        fetchUsers().then(res => {
+        for (let i = 0; i < res.length; i++) {
+            if (res[i].username === _username && res[i].password === _password) {
+                setIsLoggedIn(true);
+                setLoggedInUsername(_username);
+                navigate('/informations');
+                return;
+            }
+        }
+        
+        alert("Incorrect username or password");
+        return;
+        });
+    };
 
       return(
         <Components.Container>
             <Components.SignUpContainer signinIn={signIn}>
                 <Components.Form>
                     <Components.Title>Create Account</Components.Title>
-                    <Components.Input type='text' placeholder='username' />
-                    <Components.Input type='email' placeholder='email' />
-                    <Components.Input type='password' placeholder='password' />
+                    <Components.Input type='text' placeholder='register-username' />
+                    <Components.Input type='email' placeholder='register-email' />
+                    <Components.Input type='password' placeholder='register-password' />
                     <Components.Button onClick={handleCreateAccount}>Sign Up</Components.Button>
                 </Components.Form>
             </Components.SignUpContainer>

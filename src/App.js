@@ -17,9 +17,15 @@ export const LoginContext = createContext({
   setIsLoggedIn: () => {},
 });
 
+export const UserContext = createContext({
+  loggedInUsername: '',
+  setLoggedInUsername: () => {},
+});
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUsername, setLoggedInUsername] = useState('');
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -31,7 +37,11 @@ function App() {
             {isLoggedIn && <Topbar />}
             {isLoggedIn ? (
               <Routes>
-                <Route path="/" element={<Informations />} />
+                <Route path='/informations' element={
+                  <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                  <Informations />
+                </UserContext.Provider>
+                } />
                 <Route path="/members" element={<Members />} />
                 <Route path="/vehicles" element={<Vehicles />} />
                 <Route path="/chq" element={<Chq />} />
@@ -42,7 +52,9 @@ function App() {
                 <Routes>
                   <Route path="/" element={
                     <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-                      <Login />
+                      <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                        <Login />
+                      </UserContext.Provider>
                     </LoginContext.Provider>
                   } />
                 </Routes>
