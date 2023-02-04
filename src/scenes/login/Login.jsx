@@ -12,28 +12,6 @@ const handleCreateAccount = async () => {
     const _email = document.querySelector('input[placeholder="email"]').value;
     const _password = document.querySelector('input[placeholder="password"]').value;
 
-    const existingUsername = await client.from('users')
-        .select('username')
-        .where({username: _username})
-        .first();
-
-    if (existingUsername) {
-        alert("Username already taken");
-        console.log('Existing username: ', existingUsername);
-        return;
-    }
-
-    const existingEmail = await client.from('users')
-        .select('email')
-        .where({email: _email})
-        .first();
-
-    if (existingEmail) {
-        alert("Email already taken");
-        console.log('Existing email address: ', existingEmail);
-        return;
-    }
-
     if (_username === '' || _email === '' || !_email.includes("@") || _password === '') {
         alert("All fields are required");
         return;
