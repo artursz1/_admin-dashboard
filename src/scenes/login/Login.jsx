@@ -12,7 +12,7 @@ const handleCreateAccount = async () => {
     const email = document.querySelector('input[placeholder="email"]').value;
     const password = document.querySelector('input[placeholder="password"]').value;
 
-    if (username === '' || email === '' || password === '') {
+    if (username === '' || email === '' || !email.includes("@") || password === '') {
         alert("All fields are required");
         return;
     }
@@ -33,11 +33,11 @@ const handleCreateAccount = async () => {
     const [signIn, toggle] = React.useState(true);
     const navigate = useNavigate();
 
-    const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+    let { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 
     function handleSignIn() {
-        isLoggedIn = true;
-        
+        console.log(isLoggedIn);
+
         navigate('/informations');
         setIsLoggedIn(true);
     }
