@@ -33,10 +33,11 @@ const handleCreateAccount = async () => {
     const [signIn, toggle] = React.useState(true);
     const navigate = useNavigate();
 
-    // eslint-disable-next-line no-use-before-define
     const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 
     function handleSignIn() {
+        isLoggedIn = true;
+        
         navigate('/informations');
         setIsLoggedIn(true);
     }
