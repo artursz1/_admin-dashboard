@@ -8,20 +8,20 @@ import supabaseClient from "../../data/supabaseClient";
 const client = supabaseClient;
 
 const handleCreateAccount = async () => {
-    const _username = document.querySelector('input[placeholder="username"]').value;
-    const _email = document.querySelector('input[placeholder="email"]').value;
-    const _password = document.querySelector('input[placeholder="password"]').value;
+    const username = document.querySelector('input[placeholder="username"]').value;
+    const email = document.querySelector('input[placeholder="email"]').value;
+    const password = document.querySelector('input[placeholder="password"]').value;
 
-    if (_username === '' || _email === '' || !_email.includes("@") || _password === '') {
+    if (username === '' || email === '' || password === '') {
         alert("All fields are required");
         return;
     }
 
     try {
     await client.from('users').insert({
-        _username,
-        _email,
-        _password,
+        username,
+        email,
+        password,
         rank: 1
     });
     } catch (error) {
@@ -33,7 +33,7 @@ const handleCreateAccount = async () => {
     const [signIn, toggle] = React.useState(true);
     const navigate = useNavigate();
 
-    const { setIsLoggedIn } = useContext(LoginContext);
+    const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 
     function handleSignIn() {
         navigate('/informations');
