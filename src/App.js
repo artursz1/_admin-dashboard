@@ -32,13 +32,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {isLoggedIn && 
-              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                <Sidebar />
-              </UserContext.Provider>
-              }
+          {isLoggedIn &&
+            <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+              <Sidebar />
+            </UserContext.Provider>}
           <main className="content">
-            {isLoggedIn && <Topbar />}
+            {isLoggedIn &&
+            <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                <Topbar />
+              </UserContext.Provider>
+            </LoginContext.Provider>}
             {isLoggedIn ? (
               <Routes>
                 <Route path='/informations' element={
@@ -54,7 +58,7 @@ function App() {
               </Routes>
               ) : (
                 <Routes>
-                  <Route path="/" element={
+                  <Route path="/login" element={
                     <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
                       <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
                         <Login />

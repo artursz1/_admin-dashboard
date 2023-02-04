@@ -6,16 +6,34 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from '@mui/icons-material/Search';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+
+import { UserContext, LoginContext } from "../../App";
 
 const Topbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
 
+    let { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+    let { loggedInUsername, setLoggedInUsername } = useContext(UserContext);
+    console.log('Logged in username(Topbar): ', loggedInUsername);
+    console.log('IsLoggedIn(Topbar): ', isLoggedIn);
+
+    const navigate = useNavigate();
+
+    function handleOnLogout() {
+        setIsLoggedIn(false);
+        setLoggedInUsername('');
+
+        navigate('/login');
+    }
+
     return (
         <Box display="flex" justifyContent="space-between" p={2}>
             {/* SEARCH BAR */}
-            <Box 
+            <Box
             display="flex" 
             backgroundColor={colors.primary[400]} 
             borderRadius="3px"
@@ -39,7 +57,7 @@ const Topbar = () => {
                     <PersonOutlinedIcon />
                 </IconButton>
                 <IconButton>
-                    
+                     <LogoutIcon onClick={handleOnLogout}></LogoutIcon>
                 </IconButton>
             </Box>
         </Box>

@@ -87,6 +87,7 @@ export const Container = styled.div`
         outline: none;
     }
  `;
+
  export const GhostButton = styled(Button)`
   background-color: transparent;
   border-color: #ffffff;

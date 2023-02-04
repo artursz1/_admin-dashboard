@@ -35,8 +35,8 @@ const handleCreateAccount = async () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
     const { loggedInUsername, setLoggedInUsername } = useContext(UserContext);
 
-    console.log(isLoggedIn);
-    console.log(loggedInUsername);
+    console.log('Is logged in(Login): ', isLoggedIn);
+    console.log('Logged in username(Login): ', loggedInUsername);
 
     const navigate = useNavigate();
 
