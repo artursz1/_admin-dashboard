@@ -1,7 +1,10 @@
 [build]
-  publish = "public"
+    command = "npm run build"
+    publish = "/src"
+    base = "/"
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/login"
+  status = 302
+  force = true
