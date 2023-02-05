@@ -27,8 +27,7 @@ const Topbar = () => {
         setIsLoggedIn(false);
         setLoggedInUsername('');
 
-        localStorage.setItem('isLoggedIn', false);
-        localStorage.setItem('loggedInUsername', '');
+        localStorage.clear();
 
         navigate('/login');
     }

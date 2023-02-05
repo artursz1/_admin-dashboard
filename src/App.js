@@ -11,10 +11,10 @@ import Chq from "./scenes/chq";
 import Calendar from "./scenes/calendar";
 import Register from "./scenes/form";
 import Login from './scenes/login/Login';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginContext = createContext({
-  isLoggedIn: false,
+  isLoggedIn: localStorage.getItem('isLoggedIn'),
   setIsLoggedIn: () => {},
 });
 
@@ -28,13 +28,12 @@ function App() {
   let [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
   const [loggedInUsername, setLoggedInUsername] = useState(localStorage.getItem('loggedInUsername'));
   const navigate = useNavigate();
-  const location = useLocation();
 
   React.useEffect(() => {
-    if (!isLoggedIn && location.pathname !== '/login') {
+    if (!isLoggedIn) {
       navigate('/login');
     }
-  }, [isLoggedIn, location.pathname, navigate]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
