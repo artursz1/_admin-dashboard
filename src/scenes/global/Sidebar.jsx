@@ -125,12 +125,11 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Informations"
-              to="/"
+              to="/informations"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-
             
             <Typography
               variant="h6"

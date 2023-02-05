@@ -61,6 +61,10 @@ const handleCreateAccount = async () => {
             if (res[i].username === _username && res[i].password === _password) {
                 setIsLoggedIn(true);
                 setLoggedInUsername(_username);
+
+                localStorage.setItem('isLoggedIn', true);
+                localStorage.setItem('loggedInUsername', _username);
+
                 navigate('/informations');
                 return;
             }
