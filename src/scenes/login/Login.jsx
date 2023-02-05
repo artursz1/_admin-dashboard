@@ -7,25 +7,45 @@ import supabaseClient from "../../data/supabaseClient";
 
 const client = supabaseClient;
 
-const handleCreateAccount = async () => {
+const handleCreateAccount = async (event) => {
+    event.preventDefault();
     const username = document.querySelector('input[placeholder="register-username"]').value;
     const email = document.querySelector('input[placeholder="register-email"]').value;
     const password = document.querySelector('input[placeholder="register-password"]').value;
+    let existingUser = false;
 
     if (username === '' || email === '' || !email.includes("@") || password === '') {
         alert("All fields are required");
         return;
-    }
+    } else {
+        const checkIfUserExists = async () => {
+            let { data: listOfUsers } = await client.from('users').select('*');
+            return listOfUsers;
+        }
 
-    try {
-    await client.from('users').insert({
-        username,
-        email,
-        password,
-        rank: 1
-    });
-    } catch (error) {
-    console.error(error);
+        const result = await checkIfUserExists();
+        for (let i = 0; i < result.length; i++) {
+            if (result[i].username === username) {
+                existingUser = true;
+            }
+        }
+    
+        if(existingUser) {
+            alert('ERROR: Username already exists.');
+        } else {
+            try {
+                await client.from('users').insert({
+                    username,
+                    email,
+                    password,
+                    rank: 1
+                });
+            } catch (error) {
+                console.error(error);
+            }
+    
+            alert('New account successfully created - you can log in now');
+        }
     }
 };
 
