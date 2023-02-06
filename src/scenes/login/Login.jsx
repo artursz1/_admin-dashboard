@@ -129,16 +129,14 @@ const handleCreateAccount = async (event) => {
         }
 
         fetchInformations().then(res => {
-            for (let i = 0; i < res.length; i++) {
-                    setTotalMembers(res[i].total_members);
-                    setTotalVehicles(res[i].total_vehicles);
-    
-                    localStorage.setItem('totalMembers', res[i].total_members);
-                    localStorage.setItem('totalVehicles', res[i].total_vehicles);
+            setTotalMembers(res[0].total_members);
+            setTotalVehicles(res[0].total_vehicles);
 
-                    navigate('/informations');
-                    return;
-            }            
+            localStorage.setItem('totalMembers', res[0].total_members);
+            localStorage.setItem('totalVehicles', res[0].total_vehicles);
+
+            navigate('/informations');
+            return;
         });
     
         async function fetchUsers() {
