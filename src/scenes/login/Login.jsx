@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import * as Components from '../login/LoginComponents';
-import { LoginContext, ManagerContext, RankColor, RankContext, UserContext } from '../../App';
+import { LoginContext, ManagerContext, RankColor, RankContext, UserContext, TotalMembersContext, TotalVehiclesContext } from '../../App';
 
 import { useNavigate } from 'react-router-dom';
 import supabaseClient from "../../data/supabaseClient";
@@ -107,6 +107,8 @@ const handleCreateAccount = async (event) => {
     let { setRankName } = useContext(RankContext);
     let { setRankColor } = useContext(RankColor);
     let { setIsManager } = useContext(ManagerContext);
+    let { setTotalMembers } = useContext(TotalMembersContext);
+    let { setTotalVehicles } = useContext(TotalVehiclesContext);
 
     const navigate = useNavigate();
 
@@ -119,6 +121,22 @@ const handleCreateAccount = async (event) => {
           alert("ERROR: Both username and password are required");
           return;
         }
+
+        async function fetchInformations() {
+            let { data: _informations } = await client.from('informations').select('*');
+            
+            return _informations;
+        }
+
+        fetchInformations().then(res => {
+            for (let i = 0; i < res.length; i++) {
+                    setTotalMembers(res[i].total_members);
+                    setTotalVehicles(res[i].total_vehicles);
+    
+                    localStorage.setItem('totalMembers', res[i].total_members);
+                    localStorage.setItem('totalVehicles', res[i].total_vehicles);
+            }            
+        });
     
         async function fetchUsers() {
             let { data: users } = await client.from('users').select('*');
@@ -211,7 +229,6 @@ const handleCreateAccount = async (event) => {
                     <Components.Title>Sign In</Components.Title>
                     <Components.Input type='username' placeholder='username' />
                     <Components.Input type='password' placeholder='password' />
-                    <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
                     <Components.Button onClick={handleSignIn}>Sign In</Components.Button>
                 </Components.Form>
             </Components.SignInContainer>

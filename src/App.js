@@ -9,7 +9,6 @@ import Members from "./scenes/members";
 import Vehicles from "./scenes/vehicles";
 import Chq from "./scenes/chq";
 import Calendar from "./scenes/calendar";
-import Register from "./scenes/form";
 import Login from './scenes/login/Login';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,6 +37,16 @@ export const ManagerContext = createContext({
   setIsManager: () => {},
 });
 
+export const TotalMembersContext = createContext({
+  totalMembers: '',
+  setTotalMembers: () => {},
+});
+
+export const TotalVehiclesContext = createContext({
+  totalVehicles: '',
+  setTotalVehicles: () => {},
+});
+
 function App() {
   const [theme, colorMode] = useMode();
   let [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -45,6 +54,8 @@ function App() {
   const [rankName, setRankName] = useState(localStorage.getItem('rankName'));
   const [rankColor, setRankColor] = useState(localStorage.getItem('rankColor'));
   const [isManager, setIsManager] = useState(localStorage.getItem('isManager'));
+  const [totalMembers, setTotalMembers] = useState(localStorage.getItem('totalMembers'));
+  const [totalVehicles, setTotalVehicles] = useState(localStorage.getItem('totalVehicles'));
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -75,14 +86,17 @@ function App() {
                   {isLoggedIn ? (
                     <Routes>
                       <Route path='/informations' element={
-                        <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                          <Informations />
-                        </UserContext.Provider>
+                        <TotalVehiclesContext.Provider value={{ totalVehicles, setTotalVehicles }}>
+                          <TotalMembersContext.Provider value={{ totalMembers, setTotalMembers }}>
+                            <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                              <Informations />
+                            </UserContext.Provider>
+                          </TotalMembersContext.Provider>
+                        </TotalVehiclesContext.Provider>
                       } />
                       <Route path="/members" element={<Members />} />
                       <Route path="/vehicles" element={<Vehicles />} />
                       <Route path="/chq" element={<Chq />} />
-                      <Route path="/Register" element={<Register />} />
                       <Route path="/calendar" element={<Calendar />} />
                     </Routes>
                   ) : (
