@@ -7,46 +7,62 @@ import supabaseClient from "../../data/supabaseClient";
 
 const client = supabaseClient;
 
+function clearRegisterInputFields() {
+    document.querySelector('input[placeholder="register-username"]').value = '';
+    document.querySelector('input[placeholder="register-email"]').value = '';
+    document.querySelector('input[placeholder="register-password"]').value = '';
+    document.querySelector('input[placeholder="register-rank"]').value = '';
+}
+
+function determineRankName(rank) {
+    let _rankName = '';
+    switch (rank) {
+        case '6':
+            _rankName = 'Psycho';
+            break;
+        case '5':
+            _rankName = 'Dangerous';
+            break;
+        case '4':
+            _rankName = 'Scareless';
+            break;
+        case '3':
+            _rankName = 'Kamikaze';
+            break;
+        case '2':
+            _rankName = 'Reckless';
+            break;
+        case '1':
+            _rankName = 'Crazy';
+            break;
+        default:
+            break;
+    }
+
+    return _rankName;
+}
+
 const handleCreateAccount = async (event) => {
     event.preventDefault();
     const username = document.querySelector('input[placeholder="register-username"]').value;
     const email = document.querySelector('input[placeholder="register-email"]').value;
     const password = document.querySelector('input[placeholder="register-password"]').value;
     const rank = document.querySelector('input[placeholder="register-rank"]').value;
-    let determineRankName = '';
     let existingUser = false;
 
-    switch (rank) {
-        case '6':
-            determineRankName = 'Psycho';
-            break;
-        case '5':
-            determineRankName = 'Dangerous';
-            break;
-        case '4':
-            determineRankName = 'Scareless';
-            break;
-        case '3':
-            determineRankName = 'Kamikaze';
-            break;
-        case '2':
-            determineRankName = 'Reckless';
-            break;
-        case '1':
-            determineRankName = 'Crazy';
-            break;
-        default:
-            break;
-    }
+    const isNumeric = /^\d+$/.test(rank);
 
-    if (username === '' || email === '' || !email.includes("@") || password === '' || rank === '') {
+    if (username === '' || email === '' || password === '' || rank === '') {
         alert("ERROR: All fields are required");
         return;
     } else if(rank === '7') {
-        alert("ERROR: There's only one Rank 7: JohnLennon");
+        alert("ERROR: There's only one Rank 7: JohnLennon.");
         return;
-    }else if(rank < 1 || rank > 6) {
+    } else if(rank < 1 || rank > 6 || !isNumeric) {
         alert("ERROR: Ranks can range from [1-6]");
+        return;
+    } else if (!email.includes("@")) {
+        alert("ERROR: Invalid email.");
         return;
     } else {
         const checkIfUserExists = async () => {
@@ -70,18 +86,14 @@ const handleCreateAccount = async (event) => {
                     email,
                     password,
                     rank,
-                    rank_name: determineRankName,
+                    rank_name: determineRankName(rank),
                     manager: '0',
                 });
             } catch (error) {
                 console.error(error);
             }
 
-            document.querySelector('input[placeholder="register-username"]').value = '';
-            document.querySelector('input[placeholder="register-email"]').value = '';
-            document.querySelector('input[placeholder="register-password"]').value = '';
-            document.querySelector('input[placeholder="register-rank"]').value = '';
-        
+            clearRegisterInputFields();
             alert('New account successfully created - you can log in now');
         }
     }
