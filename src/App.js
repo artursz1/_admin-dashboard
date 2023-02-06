@@ -23,10 +23,22 @@ export const UserContext = createContext({
   setLoggedInUsername: () => {},
 });
 
+export const RankContext = createContext({
+  rankName: '',
+  setRankName: () => {},
+});
+
+export const RankColor = createContext({
+  rankColor: '',
+  setRankColor: () => {},
+});
+
 function App() {
   const [theme, colorMode] = useMode();
   let [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
   const [loggedInUsername, setLoggedInUsername] = useState(localStorage.getItem('loggedInUsername'));
+  const [rankName, setRankName] = useState(localStorage.getItem('rankName'));
+  const [rankColor, setRankColor] = useState(localStorage.getItem('rankColor'));
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -37,47 +49,51 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          {isLoggedIn &&
-            <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-              <Sidebar />
-            </UserContext.Provider>}
-          <main className="content">
-            {isLoggedIn &&
-            <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                <Topbar />
-              </UserContext.Provider>
-            </LoginContext.Provider>}
-            {isLoggedIn ? (
-              <Routes>
-                <Route path='/informations' element={
+      <RankContext.Provider value={{ rankName, setRankName }}>
+        <RankColor.Provider value={{ rankColor, setRankColor }}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <div className="app">
+              {isLoggedIn &&
+                <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                  <Sidebar />
+                </UserContext.Provider>}
+              <main className="content">
+                {isLoggedIn &&
+                <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
                   <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                  <Informations />
-                </UserContext.Provider>
-                } />
-                <Route path="/members" element={<Members />} />
-                <Route path="/vehicles" element={<Vehicles />} />
-                <Route path="/chq" element={<Chq />} />
-                <Route path="/Register" element={<Register />} />
-                <Route path="/calendar" element={<Calendar />} />
-              </Routes>
-            ) : (
-              <Routes>
-                <Route path="/login" element={
-                  <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-                    <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                        <Login />
+                    <Topbar />
+                  </UserContext.Provider>
+                </LoginContext.Provider>}
+                {isLoggedIn ? (
+                  <Routes>
+                    <Route path='/informations' element={
+                      <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                        <Informations />
                       </UserContext.Provider>
-                    </LoginContext.Provider>
-                  } />
-                </Routes>
-              )}
-          </main>
-        </div>
-      </ThemeProvider>
+                    } />
+                    <Route path="/members" element={<Members />} />
+                    <Route path="/vehicles" element={<Vehicles />} />
+                    <Route path="/chq" element={<Chq />} />
+                    <Route path="/Register" element={<Register />} />
+                    <Route path="/calendar" element={<Calendar />} />
+                  </Routes>
+                ) : (
+                  <Routes>
+                    <Route path="/login" element={
+                      <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+                        <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                            <Login />
+                          </UserContext.Provider>
+                        </LoginContext.Provider>
+                      } />
+                    </Routes>
+                  )}
+              </main>
+            </div>
+          </ThemeProvider>
+        </RankColor.Provider>
+      </RankContext.Provider>
     </ColorModeContext.Provider>
   )
 }

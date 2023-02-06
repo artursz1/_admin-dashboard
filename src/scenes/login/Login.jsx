@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import * as Components from '../login/LoginComponents';
-import { LoginContext, UserContext } from '../../App';
+import { LoginContext, RankColor, RankContext, UserContext } from '../../App';
 
 import { useNavigate } from 'react-router-dom';
 import supabaseClient from "../../data/supabaseClient";
@@ -12,10 +12,41 @@ const handleCreateAccount = async (event) => {
     const username = document.querySelector('input[placeholder="register-username"]').value;
     const email = document.querySelector('input[placeholder="register-email"]').value;
     const password = document.querySelector('input[placeholder="register-password"]').value;
+    const rank = document.querySelector('input[placeholder="register-rank"]').value;
+    let determineRankName = '';
     let existingUser = false;
 
-    if (username === '' || email === '' || !email.includes("@") || password === '') {
-        alert("All fields are required");
+    switch (rank) {
+        case '6':
+            determineRankName = 'Psycho';
+            break;
+        case '5':
+            determineRankName = 'Dangerous';
+            break;
+        case '4':
+            determineRankName = 'Scareless';
+            break;
+        case '3':
+            determineRankName = 'Kamikaze';
+            break;
+        case '2':
+            determineRankName = 'Reckless';
+            break;
+        case '1':
+            determineRankName = 'Crazy';
+            break;
+        default:
+            break;
+    }
+
+    if (username === '' || email === '' || !email.includes("@") || password === '' || rank === '') {
+        alert("ERROR: All fields are required");
+        return;
+    } else if(rank === '7') {
+        alert("ERROR: There's only one Rank 7: JohnLennon");
+        return;
+    }else if(rank < 1 || rank > 6) {
+        alert("ERROR: Ranks can range from [1-6]");
         return;
     } else {
         const checkIfUserExists = async () => {
@@ -38,12 +69,19 @@ const handleCreateAccount = async (event) => {
                     username,
                     email,
                     password,
-                    rank: 1
+                    rank,
+                    rank_name: determineRankName,
+                    manager: '0',
                 });
             } catch (error) {
                 console.error(error);
             }
-    
+
+            document.querySelector('input[placeholder="register-username"]').value = '';
+            document.querySelector('input[placeholder="register-email"]').value = '';
+            document.querySelector('input[placeholder="register-password"]').value = '';
+            document.querySelector('input[placeholder="register-rank"]').value = '';
+        
             alert('New account successfully created - you can log in now');
         }
     }
@@ -54,6 +92,8 @@ const handleCreateAccount = async (event) => {
 
     const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
     const { loggedInUsername, setLoggedInUsername } = useContext(UserContext);
+    let { setRankName } = useContext(RankContext);
+    let { setRankColor } = useContext(RankColor);
 
     console.log('Is logged in(Login): ', isLoggedIn);
     console.log('Logged in username(Login): ', loggedInUsername);
@@ -81,9 +121,44 @@ const handleCreateAccount = async (event) => {
             if (res[i].username === _username && res[i].password === _password) {
                 setIsLoggedIn(true);
                 setLoggedInUsername(_username);
+                setRankName(res[i].rank_name);
 
                 localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('loggedInUsername', _username);
+                localStorage.setItem('rankName', res[i].rank_name);
+                
+                switch (res[i].rank_name) {
+                    case 'Founder':
+                        localStorage.setItem('rankColor', '#ee0202');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    case 'Psycho':
+                        localStorage.setItem('rankColor', '#fce306');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    case 'Dangerous':
+                        localStorage.setItem('rankColor', '#1009d1');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    case 'Scareless':
+                        localStorage.setItem('rankColor', '#946f09');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    case 'Kamikaze':
+                        localStorage.setItem('rankColor', '#0c9e1a');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    case 'Reckless':
+                        localStorage.setItem('rankColor', '#851280');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    case 'Crazy':
+                        localStorage.setItem('rankColor', '#43756b');
+                        setRankColor(localStorage.getItem('rankColor'));
+                        break;
+                    default:
+                        break;
+                }
 
                 navigate('/informations');
                 return;
@@ -103,6 +178,7 @@ const handleCreateAccount = async (event) => {
                     <Components.Input type='text' placeholder='register-username' />
                     <Components.Input type='email' placeholder='register-email' />
                     <Components.Input type='password' placeholder='register-password' />
+                    <Components.Input type='text' placeholder='register-rank' />
                     <Components.Button onClick={handleCreateAccount}>Sign Up</Components.Button>
                 </Components.Form>
             </Components.SignUpContainer>
