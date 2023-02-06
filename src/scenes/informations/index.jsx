@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React/*, { useContext }*/ from 'react';
 import { Box } from "@mui/system";
 import Header from "../../components/Header";
-import { UserContext } from "../../App";
+// import { UserContext } from "../../App";
 
 const Informations = () => {
 
-    const { loggedInUsername } = useContext(UserContext);
-    console.log('Logged in username: ', loggedInUsername);
+    // const { loggedInUsername } = useContext(UserContext);
 
     return <Box m="20px">
         <Box display="flex" justifyContent="space-between" align-items="center">

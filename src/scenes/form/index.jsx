@@ -32,7 +32,6 @@ const Register = () => {
     const isNonMobile = useMediaQuery("(min-width: 600px)");
 
     function handleFormSubmit(values) {
-        console.log(values); // onSubmit handling here
     };
     
     return (

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext, tokens } from "../../theme";
@@ -8,6 +9,8 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import { UserContext, LoginContext } from "../../App";
 
@@ -16,10 +19,8 @@ const Topbar = () => {
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
 
-    let { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
-    let { loggedInUsername, setLoggedInUsername } = useContext(UserContext);
-    console.log('Logged in username(Topbar): ', loggedInUsername);
-    console.log('IsLoggedIn(Topbar): ', isLoggedIn);
+    let { setIsLoggedIn } = useContext(LoginContext);
+    let { setLoggedInUsername } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -31,6 +32,20 @@ const Topbar = () => {
 
         navigate('/login');
     }
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const handleEditProfile = () => {
+
+        setAnchorEl(null);
+    };
 
     return (
         <Box display="flex" justifyContent="space-between" p={2}>
@@ -56,7 +71,24 @@ const Topbar = () => {
                     )}
                 </IconButton>
                 <IconButton>
-                    <PersonOutlinedIcon />
+                    <PersonOutlinedIcon 
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    />
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                        }}
+                    >
+                    <MenuItem onClick={handleEditProfile}>Edit Profile</MenuItem>
+                </Menu>
                 </IconButton>
                 <IconButton>
                      <LogoutIcon onClick={handleOnLogout}></LogoutIcon>

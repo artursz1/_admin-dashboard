@@ -13,7 +13,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ApartmentIcon from '@mui/icons-material/Apartment';
 
-import { UserContext, RankContext, RankColor } from "../../App";
+import { UserContext, RankContext, RankColor, ManagerContext } from "../../App";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -41,6 +41,7 @@ const Sidebar = () => {
   const { loggedInUsername } = useContext(UserContext);
   const { rankName } = useContext(RankContext);
   const { rankColor } = useContext(RankColor);
+  const { isManager } = useContext(ManagerContext);
 
   return (
     <Box
@@ -112,6 +113,9 @@ const Sidebar = () => {
                 </Typography>
                 <Typography variant="h5" color={rankColor}>
                   {rankName}
+                  {isManager ? (
+                    <span style={{color: '#000'}}> | Manager</span>
+                  ) : null}
                 </Typography>
               </Box>
             </Box>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import * as Components from '../login/LoginComponents';
-import { LoginContext, RankColor, RankContext, UserContext } from '../../App';
+import { LoginContext, ManagerContext, RankColor, RankContext, UserContext } from '../../App';
 
 import { useNavigate } from 'react-router-dom';
 import supabaseClient from "../../data/supabaseClient";
@@ -53,7 +53,7 @@ const handleCreateAccount = async (event) => {
     const isNumeric = /^\d+$/.test(rank);
 
     if (username === '' || email === '' || password === '' || rank === '') {
-        alert("ERROR: All fields are required");
+        alert("ERROR: All fields are required.");
         return;
     } else if(rank === '7') {
         alert("ERROR: There's only one Rank 7: JohnLennon.");
@@ -87,14 +87,14 @@ const handleCreateAccount = async (event) => {
                     password,
                     rank,
                     rank_name: determineRankName(rank),
-                    manager: '0',
+                    manager: false,
                 });
             } catch (error) {
                 console.error(error);
             }
 
             clearRegisterInputFields();
-            alert('New account successfully created - you can log in now');
+            alert('INFO: New account successfully created - you can log in now.');
         }
     }
 };
@@ -102,13 +102,11 @@ const handleCreateAccount = async (event) => {
  function Login() {
     const [signIn, toggle] = React.useState(true);
 
-    const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
-    const { loggedInUsername, setLoggedInUsername } = useContext(UserContext);
+    const { setIsLoggedIn } = useContext(LoginContext);
+    const { setLoggedInUsername } = useContext(UserContext);
     let { setRankName } = useContext(RankContext);
     let { setRankColor } = useContext(RankColor);
-
-    console.log('Is logged in(Login): ', isLoggedIn);
-    console.log('Logged in username(Login): ', loggedInUsername);
+    let { setIsManager } = useContext(ManagerContext);
 
     const navigate = useNavigate();
 
@@ -118,7 +116,7 @@ const handleCreateAccount = async (event) => {
         const _password = document.querySelector('input[placeholder="password"]').value;
     
         if (_username === '' || _password === '') {
-          alert("Both username and password are required");
+          alert("ERROR: Both username and password are required");
           return;
         }
     
@@ -172,12 +170,25 @@ const handleCreateAccount = async (event) => {
                         break;
                 }
 
+                switch (res[i].manager) {
+                    case false:
+                        localStorage.setItem('isManager', false);
+                        setIsManager(localStorage.getItem('isManager'));
+                        break;
+                    case true:
+                        localStorage.setItem('isManager', true);
+                        setIsManager(localStorage.getItem('isManager'));
+                        break;
+                    default:
+                        break;
+                }
+
                 navigate('/informations');
                 return;
             }
         }
         
-        alert("Incorrect username or password");
+        alert("ERROR: Incorrect username or password.");
         return;
         });
     };
