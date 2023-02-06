@@ -135,6 +135,9 @@ const handleCreateAccount = async (event) => {
     
                     localStorage.setItem('totalMembers', res[i].total_members);
                     localStorage.setItem('totalVehicles', res[i].total_vehicles);
+
+                    navigate('/informations');
+                    return;
             }            
         });
     

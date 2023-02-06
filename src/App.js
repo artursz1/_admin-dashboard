@@ -86,13 +86,13 @@ function App() {
                   {isLoggedIn ? (
                     <Routes>
                       <Route path='/informations' element={
-                        <TotalVehiclesContext.Provider value={{ totalVehicles, setTotalVehicles }}>
-                          <TotalMembersContext.Provider value={{ totalMembers, setTotalMembers }}>
-                            <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                              <Informations />
-                            </UserContext.Provider>
-                          </TotalMembersContext.Provider>
-                        </TotalVehiclesContext.Provider>
+                        <TotalMembersContext.Provider value={{ totalMembers, setTotalMembers }}>
+                          <TotalVehiclesContext.Provider value={{ totalVehicles, setTotalVehicles }}>
+                              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                                <Informations />
+                              </UserContext.Provider>
+                          </TotalVehiclesContext.Provider>
+                        </TotalMembersContext.Provider>
                       } />
                       <Route path="/members" element={<Members />} />
                       <Route path="/vehicles" element={<Vehicles />} />

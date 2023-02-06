@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import { UserContext, LoginContext } from "../../App";
+import { UserContext, LoginContext, TotalMembersContext, TotalVehiclesContext } from "../../App";
 
 const Topbar = () => {
     const theme = useTheme();
@@ -21,6 +21,8 @@ const Topbar = () => {
 
     let { setIsLoggedIn } = useContext(LoginContext);
     let { setLoggedInUsername } = useContext(UserContext);
+    let { totalMembers } = useContext(TotalMembersContext);
+    let { totalVehicles } = useContext(TotalVehiclesContext);
 
     const navigate = useNavigate();
 
@@ -29,8 +31,11 @@ const Topbar = () => {
         setLoggedInUsername('');
 
         localStorage.clear();
+        localStorage.setItem('totalMembers', totalMembers);
+        localStorage.setItem('totalVehicles', totalVehicles);
 
         navigate('/login');
+        return;
     }
 
     const [anchorEl, setAnchorEl] = React.useState(null);
