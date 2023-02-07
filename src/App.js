@@ -37,16 +37,6 @@ export const ManagerContext = createContext({
   setIsManager: () => {},
 });
 
-export const TotalMembersContext = createContext({
-  totalMembers: '',
-  setTotalMembers: () => {},
-});
-
-export const TotalVehiclesContext = createContext({
-  totalVehicles: '',
-  setTotalVehicles: () => {},
-});
-
 function App() {
   const [theme, colorMode] = useMode();
   let [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -54,8 +44,6 @@ function App() {
   const [rankName, setRankName] = useState(localStorage.getItem('rankName'));
   const [rankColor, setRankColor] = useState(localStorage.getItem('rankColor'));
   const [isManager, setIsManager] = useState(localStorage.getItem('isManager'));
-  const [totalMembers, setTotalMembers] = useState(localStorage.getItem('totalMembers'));
-  const [totalVehicles, setTotalVehicles] = useState(localStorage.getItem('totalVehicles'));
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -88,13 +76,9 @@ function App() {
                   {isLoggedIn ? (
                     <Routes>
                       <Route path='/informations' element={
-                        <TotalMembersContext.Provider value={{ totalMembers, setTotalMembers }}>
-                          <TotalVehiclesContext.Provider value={{ totalVehicles, setTotalVehicles }}>
-                              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                                <Informations />
-                              </UserContext.Provider>
-                          </TotalVehiclesContext.Provider>
-                        </TotalMembersContext.Provider>
+                        <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                          <Informations />
+                        </UserContext.Provider>
                       } />
                       <Route path="/members" element={<Members />} />
                       <Route path="/vehicles" element={<Vehicles />} />
@@ -106,9 +90,9 @@ function App() {
                       <Route path="/login" element={
                         <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
                           <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                              <Login />
-                            </UserContext.Provider>
-                          </LoginContext.Provider>
+                            <Login />
+                          </UserContext.Provider>
+                        </LoginContext.Provider>
                         } />
                       </Routes>
                     )}

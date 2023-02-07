@@ -11,7 +11,7 @@ import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFi
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 
-import { UserContext, RankContext, RankColor, ManagerContext } from "../../App";
+import { UserContext, RankContext } from "../../App";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -39,8 +39,6 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Informations");
   const { loggedInUsername } = useContext(UserContext);
   const { rankName } = useContext(RankContext);
-  const { rankColor } = useContext(RankColor);
-  const { isManager } = useContext(ManagerContext);
 
   return (
     <Box
@@ -84,9 +82,9 @@ const Sidebar = () => {
                 >
                   {loggedInUsername}
                 </Typography>
-                <Typography variant="h5" color={rankColor}>
+                <Typography variant="h5" color={localStorage.getItem('rankColor')}>
                   {rankName}
-                  {isManager ? (
+                  {localStorage.getItem('isManager') === '1' ? (
                     <span style={{color: '#000'}}> | Manager</span>
                   ) : null}
                 </Typography>

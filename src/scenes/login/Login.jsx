@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import * as Components from '../login/LoginComponents';
-import { LoginContext, ManagerContext, RankColor, RankContext, UserContext, TotalMembersContext, TotalVehiclesContext } from '../../App';
-
+import { LoginContext, RankContext, UserContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import supabaseClient from "../../data/supabaseClient";
 
@@ -44,12 +43,12 @@ function determineRankName(rank) {
 
 const handleCreateAccount = async (event) => {
     event.preventDefault();
+
     const username = document.querySelector('input[placeholder="register-username"]').value;
     const email = document.querySelector('input[placeholder="register-email"]').value;
     const password = document.querySelector('input[placeholder="register-password"]').value;
     const rank = document.querySelector('input[placeholder="register-rank"]').value;
     let existingUser = false;
-
     const isNumeric = /^\d+$/.test(rank);
 
     if (username === '' || email === '' || password === '' || rank === '') {
@@ -69,7 +68,6 @@ const handleCreateAccount = async (event) => {
             let { data: listOfUsers } = await client.from('users').select('*');
             return listOfUsers;
         }
-
         const result = await checkIfUserExists();
         for (let i = 0; i < result.length; i++) {
             if (result[i].username === username) {
@@ -87,31 +85,23 @@ const handleCreateAccount = async (event) => {
                     password,
                     rank,
                     rank_name: determineRankName(rank),
-                    manager: false,
+                    manager: '0',
                 });
             } catch (error) {
                 console.error(error);
             }
-
             clearRegisterInputFields();
             alert('INFO: New account successfully created - you can log in now.');
         }
     }
 };
-
  function Login() {
     const [signIn, toggle] = React.useState(true);
-
     const { setIsLoggedIn } = useContext(LoginContext);
     const { setLoggedInUsername } = useContext(UserContext);
     let { setRankName } = useContext(RankContext);
-    let { setRankColor } = useContext(RankColor);
-    let { setIsManager } = useContext(ManagerContext);
-    let { setTotalMembers } = useContext(TotalMembersContext);
-    let { setTotalVehicles } = useContext(TotalVehiclesContext);
 
     const navigate = useNavigate();
-
     const handleSignIn = async (event) => {
         event.preventDefault();
         const _username = document.querySelector('input[placeholder="username"]').value;
@@ -122,20 +112,6 @@ const handleCreateAccount = async (event) => {
           return;
         }
 
-        const fetchInformations = async () => {
-            let { data: _informations } = await client.from('informations').select('*');
-            return _informations;
-        }
-
-        const _result = await fetchInformations();
-        setTotalMembers(_result[0].total_members);
-        setTotalVehicles(_result[0].total_vehicles);
-
-        localStorage.setItem('totalMembers', _result[0].total_members);
-        localStorage.setItem('totalVehicles', _result[0].total_vehicles);
-
-        navigate('/informations');
-    
         async function fetchUsers() {
             let { data: users } = await client.from('users').select('*');
             
@@ -148,7 +124,6 @@ const handleCreateAccount = async (event) => {
                 setIsLoggedIn(true);
                 setLoggedInUsername(_username);
                 setRankName(res[i].rank_name);
-                setIsManager(res[i].manager);
 
                 localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('loggedInUsername', _username);
@@ -158,36 +133,29 @@ const handleCreateAccount = async (event) => {
                 switch (res[i].rank_name) {
                     case 'Founder':
                         localStorage.setItem('rankColor', '#ee0202');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     case 'Psycho':
                         localStorage.setItem('rankColor', '#fce306');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     case 'Dangerous':
                         localStorage.setItem('rankColor', '#1009d1');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     case 'Scareless':
                         localStorage.setItem('rankColor', '#946f09');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     case 'Kamikaze':
                         localStorage.setItem('rankColor', '#0c9e1a');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     case 'Reckless':
                         localStorage.setItem('rankColor', '#851280');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     case 'Crazy':
                         localStorage.setItem('rankColor', '#43756b');
-                        setRankColor(localStorage.getItem('rankColor'));
                         break;
                     default:
                         break;
                 }
-
+                
                 navigate('/informations');
                 return;
             }
@@ -197,7 +165,6 @@ const handleCreateAccount = async (event) => {
         return;
         });
     };
-
       return(
         <Components.Container>
             <Components.SignUpContainer signinIn={signIn}>
@@ -210,7 +177,6 @@ const handleCreateAccount = async (event) => {
                     <Components.Button onClick={handleCreateAccount}>Sign Up</Components.Button>
                 </Components.Form>
             </Components.SignUpContainer>
-
             <Components.SignInContainer signinIn={signIn}>
                 <Components.Form>
                     <Components.Title>Sign In</Components.Title>
@@ -219,10 +185,8 @@ const handleCreateAccount = async (event) => {
                     <Components.Button onClick={handleSignIn}>Sign In</Components.Button>
                 </Components.Form>
             </Components.SignInContainer>
-
             <Components.OverlayContainer signinIn={signIn}>
                 <Components.Overlay signinIn={signIn}>
-
                 <Components.LeftOverlayPanel signinIn={signIn}>
                     <Components.Title>Hi</Components.Title>
                     <Components.Paragraph>
@@ -232,7 +196,6 @@ const handleCreateAccount = async (event) => {
                         Sign In
                     </Components.GhostButton>
                     </Components.LeftOverlayPanel>
-
                     <Components.RightOverlayPanel signinIn={signIn}>
                     <Components.Title>Hi</Components.Title>
                     <Components.Paragraph>
@@ -242,11 +205,9 @@ const handleCreateAccount = async (event) => {
                             Sign Up
                         </Components.GhostButton> 
                     </Components.RightOverlayPanel>
-
                 </Components.Overlay>
             </Components.OverlayContainer>
         </Components.Container>
       )
  }
-
  export default Login;

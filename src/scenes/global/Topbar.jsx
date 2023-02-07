@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import { UserContext, LoginContext } from "../../App";
+import { UserContext, LoginContext, RankContext, RankColor, ManagerContext } from "../../App";
 
 const Topbar = () => {
     const theme = useTheme();
@@ -21,12 +21,18 @@ const Topbar = () => {
 
     let { setIsLoggedIn } = useContext(LoginContext);
     let { setLoggedInUsername } = useContext(UserContext);
+    let { setRankName } = useContext(RankContext);
+    let { setRankColor } = useContext(RankColor);
+    let { setIsManager } = useContext(ManagerContext);
 
     const navigate = useNavigate();
 
     function handleOnLogout() {
         setIsLoggedIn(false);
         setLoggedInUsername('');
+        setRankName('');
+        setRankColor('');
+        setIsManager(false);
 
         localStorage.clear();
         localStorage.setItem('isManager', false);

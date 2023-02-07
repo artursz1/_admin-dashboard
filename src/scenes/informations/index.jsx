@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Box, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -9,14 +8,12 @@ import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFi
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import "../informations/styles.css";
 
-import { TotalMembersContext, TotalVehiclesContext } from "../../App";
-
 const Informations = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const { totalMembers } = useContext(TotalMembersContext);
-  const { totalVehicles } = useContext(TotalVehiclesContext);
+    const totalMembers = "50";
+    const totalVehicles = "12";
 
     return (
         <Box m="20px">
@@ -60,7 +57,7 @@ const Informations = () => {
             >
             <StatBox
                 title="[PREMIUM]"
-                subtitle="Stats"
+                subtitle="Statistics"
                 progress="0.50"
                 icon={
                 <DescriptionOutlinedIcon
