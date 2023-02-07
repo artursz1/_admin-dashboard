@@ -122,22 +122,36 @@ const handleCreateAccount = async (event) => {
           return;
         }
 
-        async function fetchInformations() {
+        const fetchInformations = async () => {
             let { data: _informations } = await client.from('informations').select('*');
-            
             return _informations;
         }
 
-        fetchInformations().then(res => {
-            setTotalMembers(res[0].total_members);
-            setTotalVehicles(res[0].total_vehicles);
+        const _result = await fetchInformations();
+        setTotalMembers(_result[0].total_members);
+        setTotalVehicles(_result[0].total_vehicles);
 
-            localStorage.setItem('totalMembers', res[0].total_members);
-            localStorage.setItem('totalVehicles', res[0].total_vehicles);
+        localStorage.setItem('totalMembers', _result[0].total_members);
+        localStorage.setItem('totalVehicles', _result[0].total_vehicles);
 
-            navigate('/informations');
-            return;
-        });
+        navigate('/informations');
+
+        // async function fetchInformations() {
+        //     let { data: _informations } = await client.from('informations').select('*');
+            
+        //     return _informations;
+        // }
+
+        // fetchInformations().then(res => {
+            // setTotalMembers(res[0].total_members);
+            // setTotalVehicles(res[0].total_vehicles);
+
+            // localStorage.setItem('totalMembers', res[0].total_members);
+            // localStorage.setItem('totalVehicles', res[0].total_vehicles);
+
+            // navigate('/informations');
+            // return;
+        // });
     
         async function fetchUsers() {
             let { data: users } = await client.from('users').select('*');
