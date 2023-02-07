@@ -73,9 +73,11 @@ function App() {
               <CssBaseline />
               <div className="app">
                 {isLoggedIn &&
+                <ManagerContext.Provider value={{ isManager, setIsManager }}>
                   <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
                     <Sidebar />
-                  </UserContext.Provider>}
+                  </UserContext.Provider>
+                </ManagerContext.Provider>}
                 <main className="content">
                   {isLoggedIn &&
                   <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>

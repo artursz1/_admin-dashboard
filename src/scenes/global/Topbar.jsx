@@ -29,6 +29,7 @@ const Topbar = () => {
         setLoggedInUsername('');
 
         localStorage.clear();
+        localStorage.setItem('isManager', false);
 
         navigate('/login');
         return;

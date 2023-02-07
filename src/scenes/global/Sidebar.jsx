@@ -16,6 +16,7 @@ import { UserContext, RankContext, RankColor, ManagerContext } from "../../App";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}

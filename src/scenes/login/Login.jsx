@@ -148,10 +148,12 @@ const handleCreateAccount = async (event) => {
                 setIsLoggedIn(true);
                 setLoggedInUsername(_username);
                 setRankName(res[i].rank_name);
+                setIsManager(res[i].manager);
 
                 localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('loggedInUsername', _username);
                 localStorage.setItem('rankName', res[i].rank_name);
+                localStorage.setItem('isManager', res[i].manager);
                 
                 switch (res[i].rank_name) {
                     case 'Founder':
@@ -181,19 +183,6 @@ const handleCreateAccount = async (event) => {
                     case 'Crazy':
                         localStorage.setItem('rankColor', '#43756b');
                         setRankColor(localStorage.getItem('rankColor'));
-                        break;
-                    default:
-                        break;
-                }
-
-                switch (res[i].manager) {
-                    case false:
-                        localStorage.setItem('isManager', false);
-                        setIsManager(localStorage.getItem('isManager'));
-                        break;
-                    case true:
-                        localStorage.setItem('isManager', true);
-                        setIsManager(localStorage.getItem('isManager'));
                         break;
                     default:
                         break;
