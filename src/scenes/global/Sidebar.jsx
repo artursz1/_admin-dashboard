@@ -10,6 +10,7 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ApartmentIcon from '@mui/icons-material/Apartment';
+import "./Topbar.css";
 
 import { UserContext, RankContext } from "../../App";
 
@@ -60,7 +61,8 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed} style={{ right: "40px", minWidth: "0", width: "250px"}}>
+      <div className="sidebar">
+      <ProSidebar collapsed={isCollapsed} style={{ right: "50px", minWidth: "0", width: "250px"}}>
         <Menu iconShape="square">
           {!isCollapsed && (
             <Box mb="25px">
@@ -70,7 +72,7 @@ const Sidebar = () => {
                   width="100px"
                   height="100px"
                   src={`../../assets/logo.gif`}
-                  style={{ cursor: "pointer", borderRadius: "50%", margin: "10px 0 0 0" }}
+                  style={{ cursor: "pointer", borderRadius: "50%", margin: "10px 0 0 30px" }}
                 />
               </Box>
               <Box textAlign="center">
@@ -78,14 +80,14 @@ const Sidebar = () => {
                   variant="h3"
                   color={colors.grey[100]}
                   fontWeight="bold"
-                  sx={{ m: "5px 0 0 0" }}
+                  sx={{ m: "5px 0 0 30px" }}
                 >
                   {loggedInUsername}
                 </Typography>
                 <Typography 
                   variant="h5"
                   color={localStorage.getItem('rankColor')}
-                  sx={{ m: "0 0 0 0" }}
+                  sx={{ m: "0 0 0 30px" }}
                 >
                   {rankName}
                   {localStorage.getItem('isManager') === '1' ? (
@@ -158,6 +160,7 @@ const Sidebar = () => {
           </Box>
         </Menu>
       </ProSidebar>
+      </div>
     </Box>
   );
 };

@@ -68,7 +68,7 @@ const Vehicles = () => {
     ];
 
     return (
-        <Box m="10px 200px 0 0">
+        <Box m="10px 200px 0 20px">
             <Header title="Vehicles" subtitle="Cars | Motorcycles | Planes"></Header>
             <Box
                 m="40px 0 0 0"
