@@ -16,7 +16,7 @@ const Informations = () => {
     const totalVehicles = "12";
 
     return (
-        <Box m="20px">
+        <Box m="20px 200px 0 0">
         {/* HEADER */}
         <Box display="flex" justifyContent="space-between" alignItems="center">
             <Header title="INFORMATIONS" subtitle="SUICIDE | .SS" />

@@ -51,21 +51,24 @@ const Vehicles = () => {
             type: "number",
             headerAlign: "left",
             align: "left",
+            cellClassName: "rank-column--cell",
         },
         {
             field: "count",
             headerName: "Total",
             flex: 1,
+            cellClassName: "total-column--cell",
         },
         {
             field: "location",
             headerName: "Location",
             flex: 1,
+            cellClassName: "location-column--cell",
         },
     ];
 
     return (
-        <Box m="20px">
+        <Box m="10px 200px 0 0">
             <Header title="Vehicles" subtitle="Cars | Motorcycles | Planes"></Header>
             <Box
                 m="40px 0 0 0"
@@ -78,8 +81,18 @@ const Vehicles = () => {
                     "& .MuiDataGrid-cell": {
                         borderBottom: "none",
                     },
+                    "& .rank-column--cell": {
+                        fontSize: '15px',
+                    },
+                    "& .total-column--cell": {
+                        fontSize: '15px',
+                    },
+                    "& .location-column--cell": {
+                        fontSize: '15px',
+                    },
                     "& .name-column--cell": {
                         color: colors.greenAccent[300],
+                        fontSize: '15px',
                     },
                     "& .MuiDataGrid-columnHeaders": {
                         backgroundColor: colors.blueAccent[700],

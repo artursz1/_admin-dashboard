@@ -56,7 +56,7 @@ const Topbar = () => {
     };
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box display="flex" justifyContent="space-between" p="10px 20px 20px 0" mr="20px" mt="10px">
             {/* SEARCH BAR */}
             <Box
             display="flex" 

@@ -74,10 +74,10 @@ const Members = () => {
     ];
 
     return (
-        <Box m="20px">
+        <Box m="20px 200px 0 0">
             <Header title="MEMBERS" subtitle="Informations | Ranks | ETC"></Header>
             
-            
+            <strong><span style={{color: '#FD6A02'}}>Note:</span></strong> Displaying only the clan members that are registered on our site.
             <Box
                 m="40px 0 0 0"
                 height="46vh"

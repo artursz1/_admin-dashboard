@@ -44,7 +44,7 @@ const Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `${colors.primary[800]} !important`,
+          background: "linear-gradient(45deg, rgba(252,176,69,0.3) 35%, rgba(131,58,180,0.1) 71%) !important",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -60,17 +60,17 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={isCollapsed} style={{ right: "40px", minWidth: "0", width: "250px"}}>
         <Menu iconShape="square">
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
+              <Box display="flex" justifyContent="center" alignItems="left">
                 <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
                   src={`../../assets/logo.gif`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                  style={{ cursor: "pointer", borderRadius: "50%", margin: "10px 0 0 0" }}
                 />
               </Box>
               <Box textAlign="center">
@@ -78,14 +78,18 @@ const Sidebar = () => {
                   variant="h3"
                   color={colors.grey[100]}
                   fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
+                  sx={{ m: "5px 0 0 0" }}
                 >
                   {loggedInUsername}
                 </Typography>
-                <Typography variant="h5" color={localStorage.getItem('rankColor')}>
+                <Typography 
+                  variant="h5"
+                  color={localStorage.getItem('rankColor')}
+                  sx={{ m: "0 0 0 0" }}
+                >
                   {rankName}
                   {localStorage.getItem('isManager') === '1' ? (
-                    <span style={{color: '#000'}}> | Manager</span>
+                    <span style={{color: '#d3dde5'}}> | Manager</span>
                   ) : null}
                 </Typography>
               </Box>
@@ -96,7 +100,7 @@ const Sidebar = () => {
           <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "5px 0 5px 30px" }}
             >
               Home
             </Typography>
@@ -111,7 +115,7 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "5px 0 5px 30px" }}
             >
               Pages
             </Typography>
@@ -126,7 +130,7 @@ const Sidebar = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 0 5px 30px" }}
             >
               Data
             </Typography>
