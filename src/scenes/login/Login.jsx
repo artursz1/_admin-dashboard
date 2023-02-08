@@ -3,7 +3,6 @@ import * as Components from '../login/LoginComponents';
 import { LoginContext, RankContext, RetrieveMembersContext, UserContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import supabaseClient from "../../data/supabaseClient";
-import { SHA256 } from "crypto-js";
 import { sha256 } from "js-sha256";
 
 const client = supabaseClient;
@@ -48,7 +47,7 @@ const handleCreateAccount = async (event) => {
 
     const username = document.querySelector('input[placeholder="register-username"]').value;
     let email = document.querySelector('input[placeholder="register-email"]').value;
-    let password = document.querySelector('input[placeholder="register-password"]').value;
+    let password = sha256(document.querySelector('input[placeholder="register-password"]').value);
     const rank = document.querySelector('input[placeholder="register-rank"]').value;
     let existingUser = false;
     const isNumeric = /^\d+$/.test(rank);
@@ -67,7 +66,6 @@ const handleCreateAccount = async (event) => {
         return;
     } else {
         email = sha256(email);
-        password = sha256(password);
 
         const checkIfUserExists = async () => {
             let { data: listOfUsers } = await client.from('users').select('*');
@@ -106,13 +104,13 @@ const handleCreateAccount = async (event) => {
     const { setIsLoggedIn } = useContext(LoginContext);
     const { setLoggedInUsername } = useContext(UserContext);
     let { setRankName } = useContext(RankContext);
-    let { memberList, setMemberList } = useContext(RetrieveMembersContext);
+    let { setMemberList } = useContext(RetrieveMembersContext);
 
     const navigate = useNavigate();
     const handleSignIn = async (event) => {
         event.preventDefault();
         const _username = document.querySelector('input[placeholder="username"]').value;
-        let _password = document.querySelector('input[placeholder="password"]').value;
+        let _password = sha256(document.querySelector('input[placeholder="password"]').value);
 
         if (_username === '' || _password === '') {
           alert("ERROR: Both username and password are required");
@@ -127,13 +125,11 @@ const handleCreateAccount = async (event) => {
 
         fetchUsers().then(res => {
         for (let i = 0; i < res.length; i++) {
-            if (res[i].username === _username && res[i].password === sha256(_password)) {
+            if (res[i].username === _username && res[i].password === _password) {
                 setIsLoggedIn(true);
                 setLoggedInUsername(_username);
                 setRankName(res[i].rank_name);
                 setMemberList(res);
-
-                console.log('Member list: ', memberList);
 
                 localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('loggedInUsername', _username);
