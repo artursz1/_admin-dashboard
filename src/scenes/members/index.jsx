@@ -3,22 +3,23 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
-import { RetrieveMembersContext } from "../../App";
+import { RetrieveMembersContext, UserContext } from "../../App";
 
 const Members = () => {
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);  
+    const colors = tokens(theme.palette.mode);
 
     const { memberList } = useContext(RetrieveMembersContext);
+    const { loggedInUsername } = useContext(UserContext);
 
-    const mockDataMembers = memberList.map(member => ({
-        id: member.id,
-        username: member.username,
-        rank: member.rank,
-        rankName: member.rank_name,
-      }));
-
-    
+    const mockDataMembers = memberList
+        .filter(member => member.username !== 'Guest')
+        .map(member => ({
+            id: member.id,
+            username: member.username,
+            rank: member.rank,
+            rankName: member.rank_name,
+  }));
 
     const columns = [
         { field: "id", headerName: "ID" },
@@ -59,6 +60,8 @@ const Members = () => {
                                 ? '#851280'
                                 : rankName === 'Crazy'
                                 ? '#43756b'
+                                : rankName === 'Visitor'
+                                ? '#b67f9e'
                                 : null
                         }
                         fontSize={"15px"}
@@ -73,7 +76,8 @@ const Members = () => {
     return (
         <Box m="20px">
             <Header title="MEMBERS" subtitle="Informations | Ranks | ETC"></Header>
-            <h5>Note: displaying only members that are registered on the site. You can view the total members of the clan by navigating to the Informations page.</h5>
+            
+            
             <Box
                 m="40px 0 0 0"
                 height="46vh"
@@ -106,7 +110,14 @@ const Members = () => {
                     },
                 }}
             >
-                <DataGrid rows={mockDataMembers} columns={columns} />
+                {loggedInUsername !== 'Guest' ? (
+                    <DataGrid rows={mockDataMembers} columns={columns} />
+                ) : 
+                    <p>
+                        <strong><span style={{color: '#FD6A02'}}>Note:</span></strong> Informations about clan members are confidential. You can view the total members of the clan by navigating to the 
+                        <strong><span style={{color: '#79797c'}}> Informations</span></strong> page.
+                    </p>
+                }
             </Box>
         </Box>
     )

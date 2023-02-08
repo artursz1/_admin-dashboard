@@ -100,13 +100,74 @@ const handleCreateAccount = async (event) => {
 };
 
  function Login() {
-    const [signIn, toggle] = React.useState(true);
+    const [ signIn, toggle ] = React.useState(true);
     const { setIsLoggedIn } = useContext(LoginContext);
     const { setLoggedInUsername } = useContext(UserContext);
     let { setRankName } = useContext(RankContext);
     let { setMemberList } = useContext(RetrieveMembersContext);
 
     const navigate = useNavigate();
+
+    const handleSignInAsGuest = async (event) => {
+        event.preventDefault();
+        const _username = document.querySelector('input[placeholder="username"]').value = 'Guest';
+        let _password = sha256(document.querySelector('input[placeholder="password"]').value = 'Guest');
+
+        async function fetchUsers() {
+            let { data: users } = await client.from('users').select('*');
+            
+            return users;
+        }
+
+        fetchUsers().then(res => {
+        for (let i = 0; i < res.length; i++) {
+            if (res[i].username === _username && res[i].password === _password) {
+                setIsLoggedIn(true);
+                setLoggedInUsername(_username);
+                setRankName(res[i].rank_name);
+                setMemberList(res);
+
+                localStorage.setItem('isLoggedIn', true);
+                localStorage.setItem('loggedInUsername', _username);
+                localStorage.setItem('rankName', res[i].rank_name);
+                localStorage.setItem('isManager', res[i].manager);
+                
+                switch (res[i].rank_name) {
+                    case 'Founder':
+                        localStorage.setItem('rankColor', '#ee0202');
+                        break;
+                    case 'Psycho':
+                        localStorage.setItem('rankColor', '#fce306');
+                        break;
+                    case 'Dangerous':
+                        localStorage.setItem('rankColor', '#1009d1');
+                        break;
+                    case 'Scareless':
+                        localStorage.setItem('rankColor', '#946f09');
+                        break;
+                    case 'Kamikaze':
+                        localStorage.setItem('rankColor', '#0c9e1a');
+                        break;
+                    case 'Reckless':
+                        localStorage.setItem('rankColor', '#851280');
+                        break;
+                    case 'Crazy':
+                        localStorage.setItem('rankColor', '#43756b');
+                        break;
+                    case 'Visitor':
+                        localStorage.setItem('rankColor', '#b67f9e');
+                        break;
+                    default:
+                        break;
+                }
+                
+                navigate('/informations');
+                return;
+            }
+        }
+        });
+    };
+
     const handleSignIn = async (event) => {
         event.preventDefault();
         const _username = document.querySelector('input[placeholder="username"]').value;
@@ -158,6 +219,9 @@ const handleCreateAccount = async (event) => {
                     case 'Crazy':
                         localStorage.setItem('rankColor', '#43756b');
                         break;
+                    case 'Guest':
+                        localStorage.setItem('rankColor', '#2196c2');
+                        break;
                     default:
                         break;
                 }
@@ -189,6 +253,7 @@ const handleCreateAccount = async (event) => {
                     <Components.Input type='username' placeholder='username' />
                     <Components.Input type='password' placeholder='password' />
                     <Components.Button onClick={handleSignIn}>Sign In</Components.Button>
+                    <Components.GuestButton onClick={handleSignInAsGuest}>Sign In as Guest</Components.GuestButton>
                 </Components.Form>
             </Components.SignInContainer>
             <Components.OverlayContainer signinIn={signIn}>

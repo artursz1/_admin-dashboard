@@ -87,6 +87,34 @@ export const Container = styled.div`
     &:focus {
         outline: none;
     }
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+ `;
+
+ export const GuestButton = styled.button`
+    border-radius: 20px;
+    border: 1px solid;
+    background-color: #525f6b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin-top: 10px;
+    &:active{
+        transform: scale(0.95);
+    }
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
  `;
 
  export const GhostButton = styled(Button)`

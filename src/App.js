@@ -97,7 +97,11 @@ function App() {
                       } />
                       <Route path="/vehicles" element={<Vehicles />} />
                       <Route path="/chq" element={<Chq />} />
-                      <Route path="/calendar" element={<Calendar />} />
+                      <Route path="/calendar" element={
+                        <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                          <Calendar />
+                        </UserContext.Provider>
+                      } />
                     </Routes>
                   ) : (
                     <Routes>
