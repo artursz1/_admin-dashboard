@@ -1,67 +1,70 @@
+import { useContext } from 'react';
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import { RetrieveMembersContext } from "../../App";
 
 const Members = () => {
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+    const colors = tokens(theme.palette.mode);  
+
+    const { memberList } = useContext(RetrieveMembersContext);
+
+    const mockDataMembers = memberList.map(member => ({
+        id: member.id,
+        username: member.username,
+        rank: member.rank,
+        rankName: member.rank_name,
+      }));
+
+    
 
     const columns = [
         { field: "id", headerName: "ID" },
         { // headerName: "ID" -> represents the column name || field: "id" -> represents member id  
-            field: "name",
+            field: "username",
             headerName: "Name",
             flex: 1,
             cellClassName: "name-column--cell",
         },
         {
-            field: "age",
-            headerName: "Age",
+            field: "rank",
+            headerName: "Rank",
             type: "number",
             headerAlign: "left",
+            cellClassName: "rank-column--cell",
             align: "left",
         },
         {
-            field: "phone",
-            headerName: "Phone",
+            field: "rankName",
+            headerName: "Rank Name",
             flex: 1,
-        },
-        {
-            field: "email",
-            headerName: "Email",
-            flex: 1,
-        },
-        {
-            field: "access",
-            headerName: "Access Level",
-            flex: 1,
-            renderCell: ({ row: { access }}) => {
+            cellClassName: "rank-name-column--cell",
+            renderCell: ({ row: { rankName }}) => {
                 return (
-                    <Box
-                        width="60%"
-                        m="0 auto"
-                        p="5px"
-                        display="flex"
-                        justifyContent="center"
-                        backgroundColor={
-                            access === "admin"
-                                ? colors.greenAccent[600]
-                                : colors.greenAccent[700]
+                    <Typography
+                        color={
+                            rankName === 'Founder'
+                                ? '#ee0202'
+                                : rankName === 'Psycho'
+                                ? '#fce306'
+                                : rankName === 'Dangerous'
+                                ? '#1009d1'
+                                : rankName === 'Scareless'
+                                ? '#946f09'
+                                : rankName === 'Kamikaze'
+                                ? '#0c9e1a'
+                                : rankName === 'Reckless'
+                                ? '#851280'
+                                : rankName === 'Crazy'
+                                ? '#43756b'
+                                : null
                         }
-                        borderRadius="4px"
+                        fontSize={"15px"}
                     >
-                        {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-                        {access === "manager" && <SecurityOutlinedIcon />}
-                        {access === "user" && <LockOpenOutlinedIcon />}
-                        <Typography color={colors.grey[100]}>
-                            {access}
-                        </Typography>
-                    </Box>
+                        {rankName}
+                    </Typography>
                 )
             }
         },
@@ -69,19 +72,19 @@ const Members = () => {
 
     return (
         <Box m="20px">
-            <Header title="MEMBERS" subtitle="Informations | Roles | ETC"></Header>
+            <Header title="MEMBERS" subtitle="Informations | Ranks | ETC"></Header>
+            <h5>Note: displaying only members that are registered on the site. You can view the total members of the clan by navigating to the Informations page.</h5>
             <Box
                 m="40px 0 0 0"
-                height="75vh"
+                height="46vh"
+                width="165vh"
+                rows={mockDataMembers}
                 sx={{
                     "& .MuiDataGrid-root": {
                         border: "none",
                     },
                     "& .MuiDataGrid-cell": {
                         borderBottom: "none",
-                    },
-                    "& .name-column--cell": {
-                        color: colors.greenAccent[300],
                     },
                     "& .MuiDataGrid-columnHeaders": {
                         backgroundColor: colors.blueAccent[700],
@@ -94,9 +97,16 @@ const Members = () => {
                         borderTop: "none",
                         backgroundColor: colors.blueAccent[700],
                     },
+                    "& .name-column--cell": {
+                        color: colors.greenAccent[500],
+                        fontSize: '15px',
+                    },
+                    "& .rank-column--cell": {
+                        fontSize: '15px',
+                    },
                 }}
             >
-                <DataGrid rows={mockDataTeam} columns={columns} />
+                <DataGrid rows={mockDataMembers} columns={columns} />
             </Box>
         </Box>
     )

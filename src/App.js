@@ -37,6 +37,11 @@ export const ManagerContext = createContext({
   setIsManager: () => {},
 });
 
+export const RetrieveMembersContext = createContext({
+  memberList: [],
+  setMemberList: () => {},
+});
+
 function App() {
   const [theme, colorMode] = useMode();
   let [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -44,6 +49,7 @@ function App() {
   const [rankName, setRankName] = useState(localStorage.getItem('rankName'));
   const [rankColor, setRankColor] = useState(localStorage.getItem('rankColor'));
   const [isManager, setIsManager] = useState(localStorage.getItem('isManager'));
+  const [memberList, setMemberList] = useState(RetrieveMembersContext.member);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -80,7 +86,15 @@ function App() {
                           <Informations />
                         </UserContext.Provider>
                       } />
-                      <Route path="/members" element={<Members />} />
+                      <Route path='/members' element={
+                        <RetrieveMembersContext.Provider value={{ memberList, setMemberList }}>
+                          <ManagerContext.Provider value={{ isManager, setIsManager }}>
+                            <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                              <Members />
+                            </UserContext.Provider>
+                          </ManagerContext.Provider>
+                        </RetrieveMembersContext.Provider>
+                      } />
                       <Route path="/vehicles" element={<Vehicles />} />
                       <Route path="/chq" element={<Chq />} />
                       <Route path="/calendar" element={<Calendar />} />
@@ -88,11 +102,15 @@ function App() {
                   ) : (
                     <Routes>
                       <Route path="/login" element={
-                        <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-                          <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
-                            <Login />
-                          </UserContext.Provider>
-                        </LoginContext.Provider>
+                        <RetrieveMembersContext.Provider value={{ memberList, setMemberList }}>
+                          <ManagerContext.Provider value={{ isManager, setIsManager }}>
+                            <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+                              <UserContext.Provider value={{ loggedInUsername, setLoggedInUsername }}>
+                                <Login />
+                              </UserContext.Provider>
+                            </LoginContext.Provider>
+                          </ManagerContext.Provider>
+                        </RetrieveMembersContext.Provider>
                         } />
                       </Routes>
                     )}
