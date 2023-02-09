@@ -14,14 +14,15 @@
 
 .right-arrow {
   position: absolute;
+  left: 1432px;
   top: 50%;
   right: 122px;
   font-size: 3rem;
-  color: #fd6a02;
+  color: #fff;
   z-index: 10;
   cursor: pointer;
   user-select: none;
-  opacity: 40%;
+  opacity: 90%;
 }
 
 .right-arrow:hover {
@@ -30,15 +31,16 @@
 }
 
 .left-arrow {
-  position: absolute;
+  position: flex;
+  margin-right: 105px;
   top: 50%;
   left: 122px;
   font-size: 3rem;
-  color: #fd6a02;
+  color: #fff;
   z-index: 10;
   cursor: pointer;
   user-select: none;
-  opacity: 40%;
+  opacity: 90%;
 }
 
 .left-arrow:hover {

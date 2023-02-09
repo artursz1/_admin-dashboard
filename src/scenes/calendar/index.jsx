@@ -61,7 +61,11 @@ const Calendar = () => {
               flex="1 1 20%"
               backgroundColor={colors.primary[400]}
               p="15px"
-              borderRadius="4px"
+              sx={{
+                backgroundColor: colors.greenAccent[900],
+                borderRadius: "10px",
+                opacity: "90%",
+              }}
             >
               <Typography variant="h5">Events</Typography>
               <List>
@@ -69,9 +73,10 @@ const Calendar = () => {
                   <ListItem
                     key={event.id}
                     sx={{
-                      backgroundColor: colors.greenAccent[500],
+                      backgroundColor: colors.greenAccent[900],
                       margin: "10px 0",
                       borderRadius: "2px",
+                      opacity: "90%",
                     }}
                   >
                     <ListItemText
@@ -92,7 +97,7 @@ const Calendar = () => {
             </Box>
 
             {/* CALENDAR */}
-            <Box flex="1 1 100%" ml="15px">
+            <Box flex="1 1 100%" ml="25px">
               <FullCalendar
                 height="75vh"
                 plugins={[
@@ -114,18 +119,7 @@ const Calendar = () => {
                 select={handleDateClick}
                 eventClick={handleEventClick}
                 eventsSet={(events) => setCurrentEvents(events)}
-                initialEvents={[
-                  {
-                    id: "12315",
-                    title: "All-day event",
-                    date: "2022-09-14",
-                  },
-                  {
-                    id: "5123",
-                    title: "Timed event",
-                    date: "2022-09-28",
-                  },
-                ]}
+                initialEvents={[]}
               />
             </Box>
           </>
@@ -133,7 +127,7 @@ const Calendar = () => {
           <p>
             <strong>
               <span style={{ color: "#FD6A02" }}>Note:</span>
-            </strong>{" "}
+            </strong>
             Informations about Events | Meetings | ETC are confidential. You can
             have access to these by
             <strong>

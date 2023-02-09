@@ -15,14 +15,12 @@ import "./Sidebar.css";
 import { UserContext, RankContext } from "../../App";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   return (
     <MenuItem
       active={selected === title}
       style={{
-        color: colors.grey[100],
+        color: "#fff",
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -47,6 +45,7 @@ const Sidebar = () => {
         "& .pro-sidebar-inner": {
           background:
             "linear-gradient(45deg, rgba(252,176,69,0.3) 35%, rgba(131,58,180,0.1) 71%) !important",
+          opacity: "100%",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -55,10 +54,10 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: "#d86717 !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#102623 !important",
         },
       }}
     >
@@ -99,7 +98,7 @@ const Sidebar = () => {
                   >
                     {rankName}
                     {localStorage.getItem("isManager") === "1" ? (
-                      <span style={{ color: "#d3dde5" }}> | Manager</span>
+                      <span style={{ color: "#1c2822" }}> | Manager</span>
                     ) : null}
                   </Typography>
                 </Box>
@@ -108,11 +107,11 @@ const Sidebar = () => {
 
             <Box paddingLeft={isCollapsed ? undefined : "10%"}>
               <Typography
-                variant="h6"
-                color={colors.grey[300]}
-                sx={{ m: "5px 0 5px 30px" }}
+                variant="h5"
+                color={"#0f2922"}
+                sx={{ m: "5px 0 5px 30px", opacity: "75%" }}
               >
-                Home
+                <strong>Home</strong>
               </Typography>
               <Item
                 title="Informations"
@@ -123,11 +122,11 @@ const Sidebar = () => {
               />
 
               <Typography
-                variant="h6"
-                color={colors.grey[300]}
-                sx={{ m: "5px 0 5px 30px" }}
+                variant="h5"
+                color={"#0f2922"}
+                sx={{ m: "5px 0 5px 30px", opacity: "75%" }}
               >
-                Pages
+                <strong>Pages</strong>
               </Typography>
               <Item
                 title="Calendar"
@@ -138,11 +137,11 @@ const Sidebar = () => {
               />
 
               <Typography
-                variant="h6"
-                color={colors.grey[300]}
-                sx={{ m: "15px 0 5px 30px" }}
+                variant="h5"
+                color={"#0f2922"}
+                sx={{ m: "15px 0 5px 30px", opacity: "75%" }}
               >
-                Data
+                <strong>Data</strong>
               </Typography>
               <Item
                 title="Members"
@@ -157,6 +156,7 @@ const Sidebar = () => {
                 icon={<DirectionsCarFilledOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
+                className="test"
               />
               <Item
                 title="CHQ"

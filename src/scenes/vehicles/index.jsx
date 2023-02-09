@@ -66,7 +66,7 @@ const Vehicles = () => {
   ];
 
   return (
-    <Box m="10px 200px 0 20px">
+    <Box m="10px 0 0 20px">
       <Header title="Vehicles" subtitle="Cars | Motorcycles | Planes"></Header>
       <Box
         m="40px 0 0 0"
@@ -75,6 +75,7 @@ const Vehicles = () => {
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
+            opacity: "90%",
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
@@ -93,15 +94,13 @@ const Vehicles = () => {
             fontSize: "15px",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
+            backgroundColor: colors.greenAccent[900],
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: colors.primary[900],
           },
           "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: colors.greenAccent[900],
           },
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.grey[100]} !important`,

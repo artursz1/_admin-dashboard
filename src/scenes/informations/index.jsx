@@ -3,6 +3,7 @@ import { tokens } from "../../theme";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../components/Header";
 import StatBox from "../../components/StatBox";
+import StatisticsStatBox from "../../components/StatisticsStatBox";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
@@ -27,14 +28,16 @@ const Informations = () => {
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
+        sx={{ opacity: "95%" }}
       >
         {/* ROW 1 */}
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.greenAccent[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title={totalMembers + "/90"}
@@ -49,14 +52,15 @@ const Informations = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.greenAccent[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
-          <StatBox
+          <StatisticsStatBox
             title="[PREMIUM]"
-            subtitle="Statistics"
+            title2="[VIP]"
             progress="0.50"
             icon={
               <DescriptionOutlinedIcon
@@ -67,10 +71,11 @@ const Informations = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.greenAccent[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title={totalVehicles + "/14"}
@@ -85,10 +90,11 @@ const Informations = () => {
         </Box>
         <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={colors.greenAccent[900]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title="House 13"

@@ -9,9 +9,12 @@ import "../../components/ImageSlider.css";
 
 const Chq = () => {
   return (
-    <Box mr="20px" mt="20px">
-      <Header title="CHQ" subtitle="Location: /findhouse 13"></Header>
-      <Box mr="20px">
+    <Box m="20px 200px 0 20px">
+      <Header
+        title="CHQ"
+        subtitle="Location: /findhouse 13"
+      ></Header>
+      <Box>
         <ImageSlider slides={SliderData} />
       </Box>
     </Box>
