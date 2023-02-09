@@ -1,58 +1,58 @@
 .slider {
-    position: relative;
-    height: 75vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .houseDesign {
-    width: 1000px;
-    height: 500px;
-    border-radius: 25px;
-  }
-  
-  .right-arrow {
-    position: absolute;
-    top: 50%;
-    right: 122px;
-    font-size: 3rem;
-    color: #FD6A02;
-    z-index: 10;
-    cursor: pointer;
-    user-select: none;
-    opacity: 40%;
-  }
+  position: relative;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .right-arrow:hover {
-    color: grey;
-    transform: scale(1.1);
-  }
-  
-  .left-arrow {
-    position: absolute;
-    top: 50%;
-    left: 122px;
-    font-size: 3rem;
-    color: #FD6A02;
-    z-index: 10;
-    cursor: pointer;
-    user-select: none;
-    opacity: 40%;
-  }
+.houseDesign {
+  width: 1000px;
+  height: 500px;
+  border-radius: 25px;
+}
 
-  .left-arrow:hover {
-    color: grey;
-    transform: scale(1.12);
-  }
-  
-  .slide {
-    opacity: 0;
-    transition-duration: 1s ease;
-  }
-  
-  .slide.active {
-    opacity: 1;
-    transition-duration: 1.5s;
-    transform: scale(1.2);
-  }
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 122px;
+  font-size: 3rem;
+  color: #fd6a02;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  opacity: 40%;
+}
+
+.right-arrow:hover {
+  color: grey;
+  transform: scale(1.1);
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 122px;
+  font-size: 3rem;
+  color: #fd6a02;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  opacity: 40%;
+}
+
+.left-arrow:hover {
+  color: grey;
+  transform: scale(1.12);
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1.5s;
+  transform: scale(1.2);
+}
