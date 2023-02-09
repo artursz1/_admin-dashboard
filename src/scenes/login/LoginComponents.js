@@ -13,7 +13,7 @@ export const Container = styled.div`
   width: 678px;
   max-width: 100%;
   min-height: 400px;
-  opacity: 90%;
+  opacity: 85%;
 `;
 
 export const SignUpContainer = styled.div`
