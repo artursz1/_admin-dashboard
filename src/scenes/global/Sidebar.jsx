@@ -15,7 +15,6 @@ import "./Sidebar.css";
 import { UserContext, RankContext } from "../../App";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-
   return (
     <MenuItem
       active={selected === title}
@@ -57,7 +56,7 @@ const Sidebar = () => {
           color: "#d86717 !important",
         },
         "& .pro-menu-item.active": {
-          color: "#102623 !important",
+          color: "#000 !important",
         },
       }}
     >
@@ -98,7 +97,7 @@ const Sidebar = () => {
                   >
                     {rankName}
                     {localStorage.getItem("isManager") === "1" ? (
-                      <span style={{ color: "#1c2822" }}> | Manager</span>
+                      <span style={{ color: "#000" }}> | Manager</span>
                     ) : null}
                   </Typography>
                 </Box>

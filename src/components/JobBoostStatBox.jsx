@@ -2,9 +2,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import ProgressCircle from "./ProgressCircle";
 
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-
-const StatBox = ({ title, title2, subtitle, progress, increase }) => {
+const JobBoostStatBox = ({ title, title2, subtitle, progress, increase }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -17,20 +15,14 @@ const StatBox = ({ title, title2, subtitle, progress, increase }) => {
             fontWeight="bold"
             sx={{ color: colors.grey[100] }}
           >
-            {title}&nbsp;
-            <CheckCircleOutlineIcon
-              style={{ color: "green", opacity: "90%", fontSize: "17px" }}
-            />
+            {title}
           </Typography>
           <Typography
             variant="h4"
             fontWeight="bold"
             sx={{ color: colors.grey[100] }}
           >
-            {title2}&nbsp;
-            <CheckCircleOutlineIcon
-              style={{ color: "green", opacity: "90%", fontSize: "17px" }}
-            />
+            {title2}
           </Typography>
         </Box>
         <Box>
@@ -46,4 +38,4 @@ const StatBox = ({ title, title2, subtitle, progress, increase }) => {
   );
 };
 
-export default StatBox;
+export default JobBoostStatBox;

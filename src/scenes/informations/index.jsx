@@ -4,7 +4,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../components/Header";
 import StatBox from "../../components/StatBox";
 import StatisticsStatBox from "../../components/StatisticsStatBox";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import JobBoostStatBox from "../../components/JobBoostStatBox";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 
@@ -13,7 +13,7 @@ const Informations = () => {
   const colors = tokens(theme.palette.mode);
 
   const totalMembers = "52";
-  const totalVehicles = "12";
+  const totalVehicles = "13";
 
   return (
     <Box m="20px 200px 0 20px">
@@ -40,9 +40,9 @@ const Informations = () => {
           borderRadius="20px"
         >
           <StatBox
-            title={totalMembers + "/90"}
+            title={totalMembers + "/120"}
             subtitle="Total Members"
-            progress={Math.round((totalMembers / 90) * 100) / 100}
+            progress={Math.round((totalMembers / 120) * 100) / 100}
             icon={
               <PersonAddIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -62,11 +62,11 @@ const Informations = () => {
             title="[PREMIUM]"
             title2="[VIP]"
             progress="0.50"
-            icon={
-              <DescriptionOutlinedIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
+          />
+          <JobBoostStatBox
+            title="JOB BOOST"
+            title2="100%"
+            progress="1"
           />
         </Box>
         <Box
@@ -78,9 +78,9 @@ const Informations = () => {
           borderRadius="20px"
         >
           <StatBox
-            title={totalVehicles + "/14"}
+            title={totalVehicles + "/16"}
             subtitle="Vehicles"
-            progress={Math.round((totalVehicles / 14) * 100) / 100}
+            progress={Math.round((totalVehicles / 16) * 100) / 100}
             icon={
               <DirectionsCarFilledOutlinedIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
