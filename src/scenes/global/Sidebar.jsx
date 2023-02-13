@@ -3,16 +3,16 @@ import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
-
+import { UserContext, RankContext } from "../../App";
+import { FaDiscord } from "react-icons/fa";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import "./Sidebar.css";
 
-import { UserContext, RankContext } from "../../App";
+import "./Sidebar.css";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -161,6 +161,13 @@ const Sidebar = () => {
                 title="CHQ"
                 to="/chq"
                 icon={<ApartmentIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Discord"
+                to="https://discord.gg/xGTM3VQsT2"
+                icon={<FaDiscord />}
                 selected={selected}
                 setSelected={setSelected}
               />
