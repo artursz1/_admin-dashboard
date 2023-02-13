@@ -78,7 +78,7 @@ const Members = () => {
     <Box m="20px 0 0 20px">
       <Header title="MEMBERS" subtitle="Informations | Ranks | ETC"></Header>
       <strong>
-        <span style={{ color: "#FD6A02" }}>Note:</span>
+        <span style={{ color: "#b67f9e" }}>Note:</span>
       </strong>{" "}
       Displaying only the clan members that are registered on our site.
       <Box
@@ -95,15 +95,15 @@ const Members = () => {
             borderBottom: "none",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.greenAccent[900],
+            backgroundColor: "#737578",
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[900],
+            backgroundColor: colors.primary[400],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.greenAccent[900],
+            backgroundColor: "#737578",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[500],
@@ -119,7 +119,7 @@ const Members = () => {
         ) : (
           <p>
             <strong>
-              <span style={{ color: "#FD6A02" }}>Note:</span>
+              <span style={{ color: "#b67f9e" }}>Note:</span>
             </strong>{" "}
             Informations about clan members are confidential. You can view the
             total members of the clan by navigating to the

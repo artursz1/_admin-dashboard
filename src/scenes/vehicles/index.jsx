@@ -94,13 +94,13 @@ const Vehicles = () => {
             fontSize: "15px",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.greenAccent[900],
+            backgroundColor: "#737578",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[900],
+            backgroundColor: colors.primary[400],
           },
           "& .MuiDataGrid-footerContainer": {
-            backgroundColor: colors.greenAccent[900],
+            backgroundColor: "#737578",
           },
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.grey[100]} !important`,

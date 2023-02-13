@@ -43,7 +43,7 @@ const Sidebar = () => {
       sx={{
         "& .pro-sidebar-inner": {
           background:
-            "linear-gradient(45deg, rgba(252,176,69,0.3) 35%, rgba(131,58,180,0.1) 71%) !important",
+            "linear-gradient(45deg, rgba(141,142,142,0.8) 35%, rgba(131,58,180,0.1) 71%) !important",
           opacity: "100%",
         },
         "& .pro-icon-wrapper": {
@@ -53,10 +53,10 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#d86717 !important",
+          color: "#8d8e8e !important",
         },
         "& .pro-menu-item.active": {
-          color: "#000 !important",
+          color: "#8d8e8e !important",
         },
       }}
     >
@@ -71,9 +71,9 @@ const Sidebar = () => {
                 <Box display="flex" justifyContent="center" alignItems="left">
                   <img
                     alt="profile-user"
-                    width="100px"
-                    height="100px"
-                    src={`../../assets/logo.gif`}
+                    width="150px"
+                    height="150px"
+                    src={`../../assets/logo.png`}
                     style={{
                       cursor: "pointer",
                       borderRadius: "50%",
@@ -107,7 +107,7 @@ const Sidebar = () => {
             <Box paddingLeft={isCollapsed ? undefined : "10%"}>
               <Typography
                 variant="h5"
-                color={"#0f2922"}
+                color={"#8d8e8e"}
                 sx={{ m: "5px 0 5px 30px", opacity: "75%" }}
               >
                 <strong>Home</strong>
@@ -122,7 +122,7 @@ const Sidebar = () => {
 
               <Typography
                 variant="h5"
-                color={"#0f2922"}
+                color={"#8d8e8e"}
                 sx={{ m: "5px 0 5px 30px", opacity: "75%" }}
               >
                 <strong>Pages</strong>
@@ -137,7 +137,7 @@ const Sidebar = () => {
 
               <Typography
                 variant="h5"
-                color={"#0f2922"}
+                color={"#8d8e8e"}
                 sx={{ m: "15px 0 5px 30px", opacity: "75%" }}
               >
                 <strong>Data</strong>

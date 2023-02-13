@@ -6,7 +6,7 @@ export const Container = styled.div`
   top: 50%;
   margin-top: 475px;
   transform: translate(-50%, -50%);
-  background-color: #0f2922;
+  background-color: #737578;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   overflow: hidden;
@@ -75,8 +75,8 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   border-radius: 20px;
-  border: 1px solid #0f2922;
-  background-color: #fd6a02;
+  border: 1px solid #737578;
+  background-color: #000;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -100,7 +100,7 @@ export const Button = styled.button`
 export const GuestButton = styled.button`
   border-radius: 20px;
   border: 1px solid;
-  background-color: #525f6b;
+  background-color: #737578;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -123,7 +123,7 @@ export const GuestButton = styled.button`
 
 export const GhostButton = styled(Button)`
   background-color: transparent;
-  border-color: #0f2922;
+  border-color: black;
 `;
 
 export const Anchor = styled.a`
@@ -148,7 +148,7 @@ export const OverlayContainer = styled.div`
 export const Overlay = styled.div`
   background: #ff416c;
   background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(45deg, grey, #0f2922);
+  background: linear-gradient(45deg, #3e7aae, #737578);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

@@ -1,10 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import ProgressCircle from "./ProgressCircle";
 
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-const StatBox = ({ title, title2, subtitle, progress, increase }) => {
+const StatBox = ({ title, title2, subtitle }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -15,26 +14,23 @@ const StatBox = ({ title, title2, subtitle, progress, increase }) => {
           <Typography
             variant="h4"
             fontWeight="bold"
-            sx={{ color: colors.grey[100] }}
+            sx={{ color: colors.grey[200] }}
           >
             {title}&nbsp;
             <CheckCircleOutlineIcon
-              style={{ color: "green", opacity: "90%", fontSize: "17px" }}
+              style={{ color: colors.greenAccent[500], opacity: "90%", fontSize: "17px" }}
             />
           </Typography>
           <Typography
             variant="h4"
             fontWeight="bold"
-            sx={{ color: colors.grey[100] }}
+            sx={{ color: colors.grey[200] }}
           >
             {title2}&nbsp;
             <CheckCircleOutlineIcon
-              style={{ color: "green", opacity: "90%", fontSize: "17px" }}
+              style={{ color: colors.greenAccent[500], opacity: "90%", fontSize: "17px" }}
             />
           </Typography>
-        </Box>
-        <Box>
-          <ProgressCircle progress={progress} />
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-between" mt="2px">

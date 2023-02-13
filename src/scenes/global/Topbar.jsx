@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
-import { ColorModeContext, tokens } from "../../theme";
+import { ColorModeContext } from "../../theme";
 import { InputBase } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -22,7 +22,6 @@ import {
 
 const Topbar = () => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
   let { setIsLoggedIn } = useContext(LoginContext);
@@ -38,10 +37,10 @@ const Topbar = () => {
     setLoggedInUsername("");
     setRankName("");
     setRankColor("");
-    setIsManager(false);
+    setIsManager("0");
 
     localStorage.clear();
-    localStorage.setItem("isManager", false);
+    localStorage.setItem("isManager", "0");
 
     navigate("/login");
     return;
@@ -71,7 +70,7 @@ const Topbar = () => {
       {/* SEARCH BAR */}
       <Box
         display="flex"
-        backgroundColor={colors.greenAccent[900]}
+        backgroundColor="#737578"
         borderRadius="20px"
         sx={{ opacity: "90%" }}
       >

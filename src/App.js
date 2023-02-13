@@ -129,11 +129,15 @@ function App() {
                       <Route
                         path="/calendar"
                         element={
-                          <UserContext.Provider
-                            value={{ loggedInUsername, setLoggedInUsername }}
+                          <ManagerContext.Provider
+                            value= {{ isManager, setIsManager }}
                           >
-                            <Calendar />
-                          </UserContext.Provider>
+                            <UserContext.Provider
+                              value={{ loggedInUsername, setLoggedInUsername }}
+                            >
+                              <Calendar />
+                            </UserContext.Provider>
+                          </ManagerContext.Provider>
                         }
                       />
                     </Routes>

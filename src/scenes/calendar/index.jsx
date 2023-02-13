@@ -15,27 +15,35 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
-import { UserContext } from "../../App";
+import { ManagerContext, UserContext } from "../../App";
 
 const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState([]);
   const { loggedInUsername } = useContext(UserContext);
+  const { isManager } = useContext(ManagerContext);
 
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
 
-    if (title) {
-      calendarApi.addEvent({
-        id: `${selected.dateStr}-${title}`,
-        title,
-        start: selected.startStr,
-        end: selected.endStr,
-        allDay: selected.allDay,
-      });
+    console.log("isManager: ", isManager);
+    if (isManager === "1") {
+      if (title) {
+        calendarApi.addEvent({
+          id: `${selected.dateStr}-${title}`,
+          title,
+          start: selected.startStr,
+          end: selected.endStr,
+          allDay: selected.allDay,
+        });
+      } else {
+        alert("Title can't be empty!");
+      }
+    } else {
+      alert("Only managers can add or remove calendar events.");
     }
   };
 
@@ -45,7 +53,11 @@ const Calendar = () => {
         `Are you sure you want to delete the event '${selected.event.title}'`
       )
     ) {
-      selected.event.remove();
+      if (isManager === "0") {
+        alert("Only managers can add or remove calendar events.");
+      } else {
+        selected.event.remove();
+      }
     }
   };
 
@@ -62,7 +74,7 @@ const Calendar = () => {
               backgroundColor={colors.primary[400]}
               p="15px"
               sx={{
-                backgroundColor: colors.greenAccent[900],
+                backgroundColor: "#737578",
                 borderRadius: "10px",
                 opacity: "90%",
               }}
@@ -73,7 +85,7 @@ const Calendar = () => {
                   <ListItem
                     key={event.id}
                     sx={{
-                      backgroundColor: colors.greenAccent[900],
+                      backgroundColor: "#",
                       margin: "10px 0",
                       borderRadius: "2px",
                       opacity: "90%",
@@ -126,12 +138,12 @@ const Calendar = () => {
         ) : (
           <p>
             <strong>
-              <span style={{ color: "#FD6A02" }}>Note:</span>
+              <span style={{ color: "#b67f9e" }}>Note: </span>
             </strong>
             Informations about Events | Meetings | ETC are confidential. You can
             have access to these by
             <strong>
-              <span style={{ color: "#FD6A02" }}> joining the clan</span>
+              <span style={{ color: "#b67f9e" }}> joining the clan</span>
             </strong>
             .
           </p>

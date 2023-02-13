@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import * as Components from "../login/LoginComponents";
 import {
   LoginContext,
+  ManagerContext,
   RankContext,
   RetrieveMembersContext,
   UserContext,
@@ -118,6 +119,7 @@ function Login() {
   const { setLoggedInUsername } = useContext(UserContext);
   let { setRankName } = useContext(RankContext);
   let { setMemberList } = useContext(RetrieveMembersContext);
+  let { setIsManager } = useContext(ManagerContext);
 
   const navigate = useNavigate();
 
@@ -143,6 +145,7 @@ function Login() {
           setLoggedInUsername(_username);
           setRankName(res[i].rank_name);
           setMemberList(res);
+          setIsManager(res[i].manager);
 
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("loggedInUsername", _username);
@@ -212,6 +215,7 @@ function Login() {
           setLoggedInUsername(_username);
           setRankName(res[i].rank_name);
           setMemberList(res);
+          setIsManager(res[i].manager);
 
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("loggedInUsername", _username);
