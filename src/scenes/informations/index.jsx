@@ -97,7 +97,7 @@ const Informations = () => {
           borderRadius="20px"
         >
           <StatBox
-            title="House 72"
+            title="House 74"
             subtitle="CHQ"
             progress="1"
             icon={
