@@ -13,7 +13,7 @@ const Informations = () => {
   const colors = tokens(theme.palette.mode);
 
   const totalMembers = "52";
-  const totalVehicles = "13";
+  const totalVehicles = "15";
 
   return (
     <Box m="20px 200px 0 20px">
@@ -78,9 +78,9 @@ const Informations = () => {
           borderRadius="20px"
         >
           <StatBox
-            title={totalVehicles + "/16"}
+            title={totalVehicles + "/20"}
             subtitle="Vehicles"
-            progress={Math.round((totalVehicles / 16) * 100) / 100}
+            progress={Math.round((totalVehicles / 20) * 100) / 100}
             icon={
               <DirectionsCarFilledOutlinedIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
