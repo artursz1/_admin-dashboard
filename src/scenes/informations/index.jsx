@@ -13,7 +13,7 @@ const Informations = () => {
   const colors = tokens(theme.palette.mode);
 
   const totalMembers = "52";
-  const totalVehicles = "15";
+  const totalVehicles = "16";
 
   return (
     <Box m="20px 200px 0 20px">
@@ -58,16 +58,8 @@ const Informations = () => {
           justifyContent="center"
           borderRadius="20px"
         >
-          <StatisticsStatBox
-            title="[PREMIUM]"
-            title2="[VIP]"
-            progress="1"
-          />
-          <JobBoostStatBox
-            title="JOB BOOST"
-            title2="100%"
-            progress="1"
-          />
+          <StatisticsStatBox title="[PREMIUM]" title2="[VIP]" progress="1" />
+          <JobBoostStatBox title="JOB BOOST" title2="100%" progress="1" />
         </Box>
         <Box
           gridColumn="span 3"
