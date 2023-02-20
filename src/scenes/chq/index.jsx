@@ -12,7 +12,7 @@ const Chq = () => {
     <Box m="20px 200px 0 20px">
       <Header
         title="CHQ"
-        subtitle="Location: /findhouse 13"
+        subtitle="Location: /findhouse 74"
       ></Header>
       <Box>
         <ImageSlider slides={SliderData} />
