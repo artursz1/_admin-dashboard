@@ -12,7 +12,7 @@ const Informations = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const totalMembers = "52";
+  const totalMembers = "75";
   const totalVehicles = "16";
 
   return (
