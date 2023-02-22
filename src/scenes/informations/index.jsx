@@ -13,7 +13,7 @@ const Informations = () => {
   const colors = tokens(theme.palette.mode);
 
   const totalMembers = "90";
-  const totalVehicles = "18";
+  const totalVehicles = "19";
 
   return (
     <Box m="20px 200px 0 20px">
