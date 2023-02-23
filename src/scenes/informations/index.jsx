@@ -12,8 +12,8 @@ const Informations = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const totalMembers = "90";
-  const totalVehicles = "19";
+  const totalMembers = "102";
+  const totalVehicles = "20";
 
   return (
     <Box m="20px 200px 0 20px">
